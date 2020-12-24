@@ -1,0 +1,24 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Resources/Fonts/Courier-New.ttf</file>
+        <file>Resources/Fonts/Roboto-Light.ttf</file>
+        <file>Resources/IcoAbout.png</file>
+        <file>Resources/IcoAddToResults.png</file>
+        <file>Resources/IcoClear.png</file>
+        <file>Resources/IcoCopyResults.png</file>
+        <file>Resources/IcoCopySelected.png</file>
+        <file>Resources/IcoExit.png</file>
+        <file>Resources/IcoFilterA.png</file>
+        <file>Resources/IcoFilterB.png</file>
+        <file>Resources/IcoFilterSubA.png</file>
+        <file>Resources/IcoFilterSubB.png</file>
+        <file>Resources/IcoOpen.png</file>
+        <file>Resources/IcoResults.png</file>
+        <file>Resources/IcoSave.png</file>
+        <file>Resources/IcoSettings.png</file>
+        <file>Resources/IcoThemeEdit.png</file>
+        <file>Resources/IcoThemeSync.png</file>
+        <file>Resources/LogView.png</file>
+        <file>Resources/IcoMessage.png</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleExecutable</key>
+	<string>UXLogViewer</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.osv.UXLogViewer</string>
+	<key>CFBundleName</key>
+	<string>UXLogViewer</string>
+	<key>CFBundleDisplayName</key>
+	<string>UXLogViewer</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleVersion - 2</key>
+	<string>6.0</string>
+	<key>CFBundleIconFiles</key>
+	<array>
+		<string>Default.png</string>
+		<string>Default@2x.png</string>
+		<string>AppIcon29x29.png</string>
+		<string>AppIcon29x29@x.png</string>
+		<string>AppIcon50x50.png</string>
+		<string>AppIcon50x50@2x.png</string>
+		<string>AppIcon57x57.png</string>
+		<string>AppIcon57x57@2x.png</string>
+		<string>AppIcon72x72.png</string>
+		<string>AppIcon72x72@2x.png</string>
+	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIFileSharingEnabled</key>
+	<true/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
+	<key>UISupportsDocumentBrowser</key>
+	<true/>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright (C) Sergii Oryshchenko © 2020 (https://github.com/os-v)</string>
+</dict>
+</plist>

@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CMainWindow</class>
+ <widget class="QMainWindow" name="CMainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>624</width>
+    <height>441</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>UXLogViewer v1.1</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="UXLogViewer.qrc">
+    <normaloff>:/Resources/LogView.png</normaloff>:/Resources/LogView.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QGridLayout" name="verticalLayout_2"/>
+  </widget>
+  <widget class="QToolBar" name="m_pToolBar">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="windowTitle">
+    <string>Toolbar</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>32</width>
+     <height>32</height>
+    </size>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="m_pMenuBarFileOpen"/>
+   <addaction name="m_pMenuBarFileSave"/>
+   <addaction name="separator"/>
+   <addaction name="m_pMenuBarFileChangeTheme"/>
+   <addaction name="m_pMenuBarFileSyncTheme"/>
+   <addaction name="m_pMenuBarFileSettings"/>
+   <addaction name="separator"/>
+   <addaction name="m_pMenuBarEditMessage"/>
+   <addaction name="m_pMenuBarEditCopySelected"/>
+   <addaction name="m_pMenuBarEditAddToResults"/>
+   <addaction name="m_pMenuBarEditCopyResults"/>
+   <addaction name="m_pMenuBarEditClear"/>
+   <addaction name="separator"/>
+   <addaction name="m_pMenuBarViewResultView"/>
+   <addaction name="m_pMenuBarViewFilterAView"/>
+   <addaction name="m_pMenuBarViewSubFilterAView"/>
+   <addaction name="m_pMenuBarViewFilterBView"/>
+   <addaction name="m_pMenuBarViewSubFilterBView"/>
+   <addaction name="separator"/>
+   <addaction name="m_pMenuBarHelpAbout"/>
+  </widget>
+  <widget class="QStatusBar" name="m_pStatusBar"/>
+  <widget class="QMenuBar" name="m_pMenuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>624</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="nativeMenuBar">
+    <bool>false</bool>
+   </property>
+   <widget class="QMenu" name="m_pMenuBarFile">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <addaction name="m_pMenuBarFileOpen"/>
+    <addaction name="m_pMenuBarFileSave"/>
+    <addaction name="action_Merge"/>
+    <addaction name="separator"/>
+    <addaction name="m_pMenuBarFileChangeTheme"/>
+    <addaction name="m_pMenuBarFileSyncTheme"/>
+    <addaction name="separator"/>
+    <addaction name="m_pMenuBarFileSettings"/>
+    <addaction name="separator"/>
+    <addaction name="m_pMenuBarFileExit"/>
+   </widget>
+   <widget class="QMenu" name="m_pMenuBarEdit">
+    <property name="title">
+     <string>&amp;Edit</string>
+    </property>
+    <addaction name="m_pMenuBarEditMessage"/>
+    <addaction name="m_pMenuBarEditCopySelected"/>
+    <addaction name="m_pMenuBarEditCopyResults"/>
+    <addaction name="m_pMenuBarEditAddToResults"/>
+    <addaction name="m_pMenuBarEditClear"/>
+   </widget>
+   <widget class="QMenu" name="m_pMenuBarView">
+    <property name="title">
+     <string>&amp;View</string>
+    </property>
+    <addaction name="m_pMenuBarViewResultView"/>
+    <addaction name="separator"/>
+    <addaction name="m_pMenuBarViewFilterAView"/>
+    <addaction name="m_pMenuBarViewSubFilterAView"/>
+    <addaction name="separator"/>
+    <addaction name="m_pMenuBarViewFilterBView"/>
+    <addaction name="m_pMenuBarViewSubFilterBView"/>
+   </widget>
+   <widget class="QMenu" name="m_pMenuBarHelp">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="m_pMenuBarHelpAbout"/>
+   </widget>
+   <addaction name="m_pMenuBarFile"/>
+   <addaction name="m_pMenuBarEdit"/>
+   <addaction name="m_pMenuBarView"/>
+   <addaction name="m_pMenuBarHelp"/>
+  </widget>
+  <action name="m_pMenuBarFileOpen">
+   <property name="icon">
+    <iconset resource="UXLogViewer.qrc">
+     <normaloff>:/Resources/IcoOpen.png</normaloff>:/Resources/IcoOpen.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Open</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="m_pMenuBarFileSave">
+   <property name="icon">
+    <iconset>
+     <normalon>:/Resources/IcoSave.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Save As</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="m_pMenuBarFileSettings">
+   <property name="icon">
+    <iconset resource="UXLogViewer.qrc">
+     <normaloff>:/Resources/IcoSettings.png</normaloff>:/Resources/IcoSettings.png</iconset>
+   </property>
+   <property name="text">
+    <string>Se&amp;ttings</string>
+   </property>
+  </action>
+  <action name="m_pMenuBarFileExit">
+   <property name="icon">
+    <iconset resource="UXLogViewer.qrc">
+     <normaloff>:/Resources/IcoExit.png</normaloff>:/Resources/IcoExit.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Exit</string>
+   </property>
+  </action>
+  <action name="m_pMenuBarEditCopySelected">
+   <property name="icon">
+    <iconset resource="UXLogViewer.qrc">
+     <normaloff>:/Resources/IcoCopySelected.png</normaloff>:/Resources/IcoCopySelected.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Copy Selected</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
+  </action>
+  <action name="m_pMenuBarViewFilterAView">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="UXLogViewer.qrc">
+     <normaloff>:/Resources/IcoFilterA.png</normaloff>:/Resources/IcoFilterA.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Filter A View</string>
+   </property>
+  </action>
+  <action name="m_pMenuBarViewResultView">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="UXLogViewer.qrc">
+     <normaloff>:/Resources/IcoResults.png</normaloff>:/Resources/IcoResults.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Result View</string>
+   </property>
+  </action>
+  <action name="m_pMenuBarViewSubFilterAView">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="UXLogViewer.qrc">
+     <normaloff>:/Resources/IcoFilterSubA.png</normaloff>:/Resources/IcoFilterSubA.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Sub Filter A View</string>
+   </property>
+  </action>
+  <action name="m_pMenuBarViewFilterBView">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="UXLogViewer.qrc">
+     <normaloff>:/Resources/IcoFilterB.png</normaloff>:/Resources/IcoFilterB.png</iconset>
+   </property>
+   <property name="text">
+    <string>Filter &amp;B View</string>
+   </property>
+  </action>
+  <action name="m_pMenuBarViewSubFilterBView">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="UXLogViewer.qrc">
+     <normaloff>:/Resources/IcoFilterSubB.png</normaloff>:/Resources/IcoFilterSubB.png</iconset>
+   </property>
+   <property name="text">
+    <string>S&amp;ub Filter B View</string>
+   </property>
+  </action>
+  <action name="m_pMenuBarEditAddToResults">
+   <property name="icon">
+    <iconset resource="UXLogViewer.qrc">
+     <normaloff>:/Resources/IcoAddToResults.png</normaloff>:/Resources/IcoAddToResults.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Add To Results</string>
+   </property>
+  </action>
+  <action name="m_pMenuBarHelpAbout">
+   <property name="icon">
+    <iconset>
+     <normalon>:/Resources/IcoAbout.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>&amp;About</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
+   </property>
+  </action>
+  <action name="m_pMenuBarFileChangeTheme">
+   <property name="icon">
+    <iconset resource="UXLogViewer.qrc">
+     <normaloff>:/Resources/IcoThemeEdit.png</normaloff>:/Resources/IcoThemeEdit.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Change Theme</string>
+   </property>
+  </action>
+  <action name="m_pMenuBarEditCopyResults">
+   <property name="icon">
+    <iconset resource="UXLogViewer.qrc">
+     <normaloff>:/Resources/IcoCopyResults.png</normaloff>:/Resources/IcoCopyResults.png</iconset>
+   </property>
+   <property name="text">
+    <string>Copy Results</string>
+   </property>
+  </action>
+  <action name="m_pMenuBarFileSyncTheme">
+   <property name="icon">
+    <iconset resource="UXLogViewer.qrc">
+     <normaloff>:/Resources/IcoThemeSync.png</normaloff>:/Resources/IcoThemeSync.png</iconset>
+   </property>
+   <property name="text">
+    <string>S&amp;ync Themes</string>
+   </property>
+  </action>
+  <action name="m_pMenuBarEditClear">
+   <property name="icon">
+    <iconset resource="UXLogViewer.qrc">
+     <normaloff>:/Resources/IcoClear.png</normaloff>:/Resources/IcoClear.png</iconset>
+   </property>
+   <property name="text">
+    <string>C&amp;lear</string>
+   </property>
+  </action>
+  <action name="m_pMenuBarEditMessage">
+   <property name="icon">
+    <iconset resource="UXLogViewer.qrc">
+     <normaloff>:/Resources/IcoMessage.png</normaloff>:/Resources/IcoMessage.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Show Message</string>
+   </property>
+  </action>
+  <action name="action_Merge">
+   <property name="text">
+    <string>&amp;Merge</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="UXLogViewer.qrc"/>
+ </resources>
+ <connections/>
+</ui>
