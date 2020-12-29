@@ -15,7 +15,7 @@
 #define ISALPHA(c)		(c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z')
 #define ISWHITE(c)		(c == ' ' || c == '\t' || c == '\r' || c == '\n')
 
-const char *CLogFilter::m_pOperator[] = { "", "(", ")", ".", ",", "&&", "||", "=#", "=~", "=^", "=$", "!#", "!~", "!^", "!$", "==", "!=", ">=", "<=", ">", "<", "!" };
+QString CLogFilter::m_pOperator[] = { "", "(", ")", ".", ",", "&&", "||", "=#", "=~", "=^", "=$", "!#", "!~", "!^", "!$", "==", "!=", ">=", "<=", ">", "<", "!" };
 
 CLogFilter::CLogFilter()
 {
@@ -79,21 +79,17 @@ bool CLogFilter::Check(QString *pRecord)
 bool CLogFilter::Parse(QString &sFilter, QVector<int> &pToken, QStringList &pIdent)
 {
 
-	ushort pStrOpen[]  = { '"', '\'', 171, 8216, 8217, 8218, 8220, 8221 };
-	ushort pStrClose[] = { '"', '\'', 187, 8217, 8217, 8216, 8221, 8221 };
-
 	for(const ushort *lpText = sFilter.utf16(); *lpText; lpText++)
 	{
 
-		ushort cCurr = *lpText;
-		ushort cNext = *(lpText + 1);
+		unsigned short cCurr = *lpText;
+		unsigned short cNext = *(lpText + 1);
 		int eToken = TOKEN_INVALID;
 		QString sToken = "";
 
 		if(ISWHITE(cCurr))
 			continue;
 
-		int iStrChar = -1;
 		if(cCurr == '0' && (cNext == 'x' || cNext == 'X'))
 		{
 			lpText++, lpText++;
@@ -109,24 +105,71 @@ bool CLogFilter::Parse(QString &sFilter, QVector<int> &pToken, QStringList &pIde
 			eToken = TOKEN_DEC;
 			if(*lpText) lpText--;
 		}
+		else if(cCurr == '"')
+		{
+			lpText++;
+			for(; *lpText && *lpText != '"'; lpText++)
+				sToken += *lpText;
+			eToken = TOKEN_STRING;
+		}
+		else if(cCurr == 8220)
+		{
+			lpText++;
+			for(; *lpText && *lpText != 8221; lpText++)
+				sToken += *lpText;
+			eToken = TOKEN_STRING;
+		}
 		else if(ISALPHA(cCurr))
 		{
 			int iItem = 0;
 			for(; *lpText && ISALPHA(*lpText); lpText++)
-				sToken += QChar(*lpText);
+				sToken += *lpText;
 			for(iItem = 0; eToken == TOKEN_INVALID && iItem < m_pTheme->GetColCount() && sToken.compare(m_pTheme->FieldName[iItem], Qt::CaseInsensitive); iItem++);
 			eToken = eToken == TOKEN_INVALID && iItem != m_pTheme->GetColCount() ? TOKEN_IDENTIFIER + iItem : eToken;
 			if(*lpText) lpText--;
 		}
-		else if((iStrChar = ArrayFindIndex(pStrOpen, ARRAY_SIZE(pStrOpen), cCurr)) != -1)
-		{
-			lpText++;
-			for(; *lpText && *lpText != pStrClose[iStrChar]; lpText++)
-				sToken += QChar(*lpText);
-			eToken = *lpText ? TOKEN_STRING : TOKEN_INVALID;
-		}
-		else if((iStrChar = StrArrayFindIndex(m_pOperator, 1, ARRAY_SIZE(m_pOperator), lpText)) != -1)
-			eToken = TOKEN_OPERATOR + iStrChar;
+		else if(cCurr == '(')
+			eToken = TOKEN_OPERATOR + OP_LBRACE;
+		else if(cCurr == ')')
+			eToken = TOKEN_OPERATOR + OP_RBRACE;
+		else if(cCurr == '.')
+			eToken = TOKEN_OPERATOR + OP_DOT;
+		else if(cCurr == ',')
+			eToken = TOKEN_OPERATOR + OP_COMA;
+		else if(cCurr == '&' && cNext == '&')
+			eToken = TOKEN_OPERATOR + OP_BOOL_AND;
+		else if(cCurr == '|' && cNext == '|')
+			eToken = TOKEN_OPERATOR + OP_BOOL_OR;
+		else if (cCurr == '=' && cNext == '#')
+			eToken = TOKEN_OPERATOR + OP_REGEXP;
+		else if (cCurr == '!' && cNext == '#')
+			eToken = TOKEN_OPERATOR + OP_NREGEXP;
+		else if (cCurr == '=' && cNext == '~')
+			eToken = TOKEN_OPERATOR + OP_CONTS;
+		else if (cCurr == '!' && cNext == '~')
+			eToken = TOKEN_OPERATOR + OP_NCONTS;
+		else if (cCurr == '=' && cNext == '^')
+			eToken = TOKEN_OPERATOR + OP_STARTS;
+		else if (cCurr == '!' && cNext == '^')
+			eToken = TOKEN_OPERATOR + OP_NSTARTS;
+		else if (cCurr == '=' && cNext == '$')
+			eToken = TOKEN_OPERATOR + OP_ENDS;
+		else if (cCurr == '!' && cNext == '$')
+			eToken = TOKEN_OPERATOR + OP_NENDS;
+		else if(cCurr == '=' && cNext == '=')
+			eToken = TOKEN_OPERATOR + OP_BOOL_EQ;
+		else if(cCurr == '!' && cNext == '=')
+			eToken = TOKEN_OPERATOR + OP_BOOL_NEQ;
+		else if(cCurr == '>' && cNext == '=')
+			eToken = TOKEN_OPERATOR + OP_BOOL_GTE;
+		else if(cCurr == '<' && cNext == '=')
+			eToken = TOKEN_OPERATOR + OP_BOOL_LEE;
+		else if(cCurr == '>')
+			eToken = TOKEN_OPERATOR + OP_BOOL_GT;
+		else if(cCurr == '<')
+			eToken = TOKEN_OPERATOR + OP_BOOL_LE;
+		else if(cCurr == '!')
+			eToken = TOKEN_OPERATOR + OP_BOOL_NOT;
 
 		if(eToken >= TOKEN_OPERATOR + OP_BOOL_AND && eToken <= TOKEN_OPERATOR + OP_BOOL_LEE)
 			lpText++;

@@ -46,8 +46,6 @@ public:
 
 	QByteArray SaveState();
 	bool RestoreState(QByteArray pState);
-	void ResizeColumnsToContents();
-	void ResizeColumn(int iSection, int nSize);
 
 	void ResetData();
 	void ThemeUpdated(QByteArray pState);
@@ -81,10 +79,8 @@ private:
 
 signals:
 
-	void OnHeaderSectionResized(int iSection, int nSize);
-
 	void OnItemAltAction(bool fAltMod);
-	void OnItemContextMenu(QPoint pt);
+	void OnItemContextMenu(CLogWidget *pWidget, QPoint pt);
 
 private slots:
 
@@ -92,11 +88,8 @@ private slots:
 	void OnVScrollSliderMoved(int nValue);
 	void OnVScrollActionTriggered(int nAction);
 
+	void OnItemContextMenu(QPoint pt);
 	void OnHeaderContextMenu(QPoint pt);
-	void OnHeaderSectionDoubleClicked(int logicalIndex);
-	void OnHeaderSectionResized(int logicalIndex, int oldSize, int newSize);
-
-	void OnItemContextMenuClicked(QPoint pt);
 	void OnItemClicked(const QModelIndex &index);
 	void OnItemDoubleClicked(const QModelIndex &index);
 

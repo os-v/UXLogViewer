@@ -22,7 +22,6 @@
 #include "Dialogs/MessageDialog.h"
 #include "Dialogs/AboutDialog.h"
 #include "ProductInfo.h"
-#include <QStandardPaths>
 
 CMainWindow::CMainWindow(QWidget *parent) :
 	QMainWindow(parent),
@@ -80,14 +79,13 @@ CMainWindow::CMainWindow(QWidget *parent) :
 
 	connect(ui->m_pMenuBarHelpAbout, SIGNAL(triggered()), this, SLOT(OnHelpAbout()));
 
-	connect(m_pLogWidget, SIGNAL(OnHeaderSectionResized(int, int)), this, SLOT(OnHeaderSectionResized(int, int)));
 	connect(m_pLogWidget, SIGNAL(OnItemAltAction(bool)), this, SLOT(OnEditAltAction(bool)));
-	connect(m_pLogWidget, SIGNAL(OnItemContextMenu(QPoint)), this, SLOT(OnItemContextMenu(QPoint)));
+	connect(m_pLogWidget, SIGNAL(OnItemContextMenu(CLogWidget*, QPoint)), this, SLOT(OnItemContextMenu(CLogWidget*, QPoint)));
 	for(int iFilter = 0; iFilter < FILTER_COUNT; iFilter++)
 	{
 		if(iFilter >= FILTER_MAIN_A)
 			connect(m_pFilterView[iFilter]->widget(), SIGNAL(OnItemAltAction(bool)), this, SLOT(OnEditAltAction(bool)));
-		connect(m_pFilterView[iFilter]->widget(), SIGNAL(OnItemContextMenu( QPoint)), this, SLOT(OnItemContextMenu(QPoint)));
+		connect(m_pFilterView[iFilter]->widget(), SIGNAL(OnItemContextMenu(CLogWidget*, QPoint)), this, SLOT(OnItemContextMenu(CLogWidget*, QPoint)));
 	}
 
 	if(!pConfig.IsLoaded())
@@ -123,12 +121,9 @@ CMainWindow::CMainWindow(QWidget *parent) :
 	if(CAppConfig::IsMobile)
 	{
 		menuBar()->hide();
-		statusBar()->hide();
 		ui->m_pToolBar->setMovable(false);
 	}
 
-	m_pLogWidget->setFocus();
-	
 }
 
 CMainWindow::~CMainWindow()
@@ -202,27 +197,15 @@ CLogWidget *CMainWindow::FindFocusedLogWidget()
 QString CMainWindow::PromptFilePath(bool fSave)
 {
 
-	bool fStaticFolder = false;
 	bool fUseCustomDialog = fSave ? CAppConfig::Instance().FileSaveUI : CAppConfig::Instance().FileOpenUI;
 
-	QString sFolder = CAppConfig::Instance().RecentFolder;
-
-#ifdef Q_OS_IOS
-	if(fSave)
-	{
-		fStaticFolder = true;
-		fUseCustomDialog = true;
-		sFolder = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation).last();
-	}
-#endif
-	
 	if(!fUseCustomDialog && fSave)
-		return QFileDialog::getSaveFileName(this, QString(), sFolder);
+		return QFileDialog::getSaveFileName(this, QString(), CAppConfig::Instance().RecentFolder);
 
 	if(!fUseCustomDialog && !fSave)
-		return QFileDialog::getOpenFileName(this, QString(), sFolder);
+		return QFileDialog::getOpenFileName(this, QString(), CAppConfig::Instance().RecentFolder);
 
-	return CFileDialog::PromptFileName(this, fSave, QString(), sFolder, fStaticFolder);
+	return CFileDialog::PromptFileName(this, fSave, QString(), CAppConfig::Instance().RecentFolder);
 }
 
 void CMainWindow::OnFileOpen()
@@ -422,24 +405,9 @@ void CMainWindow::OnHelpAbout()
 
 }
 
-void CMainWindow::OnHeaderSectionResized(int iSection, int nSize)
+void CMainWindow::OnItemContextMenu(CLogWidget *pWidget, QPoint pt)
 {
 
-	if(sender() != m_pLogWidget)
-		((CLogWidget*)m_pLogWidget)->ResizeColumn(iSection, nSize);
-
-	for(int iFilter = FILTER_MAIN_A; iFilter < FILTER_COUNT; iFilter++)
-	{
-		if(sender() != m_pFilterView[iFilter]->widget())
-			((CLogWidget*)m_pFilterView[iFilter]->widget())->ResizeColumn(iSection, nSize);
-	}
-
-}
-
-void CMainWindow::OnItemContextMenu(QPoint pt)
-{
-
-	CLogWidget *pWidget = (CLogWidget*)sender();
 	if(pWidget == ((CLogWidget*)m_pFilterView[FILTER_RESULT]->widget()))
 		m_pCtxMenuResult->popup(pt);
 	else

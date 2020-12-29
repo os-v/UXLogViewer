@@ -75,8 +75,7 @@ private slots:
 
 	void OnHelpAbout();
 
-	void OnHeaderSectionResized(int iSection, int nSize);
-	void OnItemContextMenu(QPoint pt);
+	void OnItemContextMenu(CLogWidget *pWidget, QPoint pt);
 
 };
 

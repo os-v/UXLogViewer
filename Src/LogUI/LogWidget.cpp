@@ -44,18 +44,13 @@ CLogWidget::CLogWidget(QWidget *parent, int nID, bool fSearchBar, CLogWidget *pF
 	ui->m_pTreeView->setContextMenuPolicy(Qt::CustomContextMenu);
 	ui->m_pTreeView->header()->setContextMenuPolicy(Qt::CustomContextMenu);
 
-	ui->m_pTreeView->header()->setSectionsClickable(true);
-	//ui->m_pTreeView->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
-
 	connect(ui->m_pTreeView->verticalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(OnVScrollValuechanged(int)), Qt::QueuedConnection);
 	connect(ui->m_pTreeView->verticalScrollBar(), SIGNAL(sliderMoved(int)), this, SLOT(OnVScrollSliderMoved(int)), Qt::QueuedConnection);
 	connect(ui->m_pTreeView->verticalScrollBar(), SIGNAL(actionTriggered(int)), this, SLOT(OnVScrollActionTriggered(int)), Qt::QueuedConnection);
 
+	connect(ui->m_pTreeView, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(OnItemContextMenu(QPoint)));
 	connect(ui->m_pTreeView->header(), SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(OnHeaderContextMenu(QPoint)));
-	connect(ui->m_pTreeView->header(), SIGNAL(sectionDoubleClicked(int)), this, SLOT(OnHeaderSectionDoubleClicked(int)));
-	connect(ui->m_pTreeView->header(), SIGNAL(sectionResized(int, int, int)), this, SLOT(OnHeaderSectionResized(int, int, int)));
 
-	connect(ui->m_pTreeView, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(OnItemContextMenuClicked(QPoint)));
 	connect(ui->m_pTreeView, SIGNAL(clicked(const QModelIndex&)), this, SLOT(OnItemClicked(const QModelIndex&)), Qt::QueuedConnection);
 	connect(ui->m_pTreeView, SIGNAL(doubleClicked(const QModelIndex&)), this, SLOT(OnItemDoubleClicked(const QModelIndex&)), Qt::QueuedConnection);
 
@@ -98,28 +93,6 @@ QByteArray CLogWidget::SaveState()
 bool CLogWidget::RestoreState(QByteArray pState)
 {
 	return ui->m_pTreeView->header()->restoreState(pState);
-}
-
-void CLogWidget::ResizeColumnsToContents()
-{
-
-	QHeaderView *pHeader = ui->m_pTreeView->header();
-
-	pHeader->resizeSections(QHeaderView::ResizeToContents);
-
-	int iLastColumn = pHeader->count() - 1;
-	int nSizeHint = pHeader->sizeHintForColumn(iLastColumn);
-	pHeader->resizeSection(iLastColumn, nSizeHint);
-	ui->m_pTreeView->resizeColumnToContents(iLastColumn);
-
-}
-
-void CLogWidget::ResizeColumn(int iSection, int nSize)
-{
-
-	QHeaderView *pHeader = ui->m_pTreeView->header();
-	pHeader->resizeSection(iSection, nSize);
-
 }
 
 void CLogWidget::ResetData()
@@ -188,8 +161,6 @@ void CLogWidget::LoadFile(QString sFileName)
 
 	QScrollBar *pScroll = ui->m_pTreeView->verticalScrollBar();
 	pScroll->setValue(m_pLogFileRaw->GetRecord());
-
-	//ui->m_pTreeView->resizeColumnsToContents();
 
 }
 
@@ -417,6 +388,15 @@ void CLogWidget::OnVScrollActionTriggered(int nAction)
 
 }
 
+void CLogWidget::OnItemContextMenu(QPoint pt)
+{
+
+	pt = ui->m_pTreeView->mapToGlobal(pt);
+
+	emit OnItemContextMenu(this, pt);
+
+}
+
 void CLogWidget::OnHeaderContextMenu(QPoint pt)
 {
 
@@ -460,35 +440,6 @@ void CLogWidget::OnHeaderContextMenu(QPoint pt)
 
 	for(int iColumn = 0; iColumn < GetLogModel()->columnCount(); iColumn++)
 		pHeader->showSection(iColumn);
-
-}
-
-void CLogWidget::OnHeaderSectionDoubleClicked(int logicalIndex)
-{
-
-	QHeaderView *pHeader = ui->m_pTreeView->header();
-	if(logicalIndex == pHeader->count() - 1)
-	{
-		int nSizeHint = pHeader->sizeHintForColumn(logicalIndex);
-		pHeader->resizeSection(logicalIndex, nSizeHint);
-	}
-	ui->m_pTreeView->resizeColumnToContents(logicalIndex);
-
-}
-
-void CLogWidget::OnHeaderSectionResized(int logicalIndex, int oldSize, int newSize)
-{
-
-	emit OnHeaderSectionResized(logicalIndex, newSize);
-
-}
-
-void CLogWidget::OnItemContextMenuClicked(QPoint pt)
-{
-
-	pt = ui->m_pTreeView->mapToGlobal(pt);
-
-	emit OnItemContextMenu(pt);
 
 }
 
@@ -597,7 +548,6 @@ void CLogWidget::OnSearchTriggered()
 		CAppConfig::Instance().GetFilterSearch(m_nViewID).push_front(sFilter);
 		ui->m_pComboSearch->insertItem(0, sFilter);
 		ui->m_pComboSearch->setCurrentIndex(0);
-		ui->m_pTreeView->setFocus();
 	}
 
 }

@@ -173,7 +173,7 @@ protected:
 		}
 	};
 
-	static const char *m_pOperator[];
+	static QString m_pOperator[];
 
 	QString **m_pField;
 

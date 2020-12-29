@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 	QApplication::setStyle(QStyleFactory::create("Fusion"));
 	QApplication::setPalette(QApplication::style()->standardPalette());
 
-	QApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
+	QApplication::setAttribute(Qt::AA_EnableHighDpiScaling, false);
 	QApplication::setAttribute(Qt::AA_DisableWindowContextHelpButton);
 
 	QApplication pApp(argc, argv);

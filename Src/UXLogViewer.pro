@@ -93,5 +93,3 @@ win32 {
 
 unix:!macx {
 }
-
-ANDROID_ABIS = armeabi-v7a

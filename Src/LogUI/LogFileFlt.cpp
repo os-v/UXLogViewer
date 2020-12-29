@@ -117,8 +117,6 @@ void CLogFileFlt::ProcessData(bool fSave)
 
 	connect(this, SIGNAL(ProgressUpdate(int)), this, SLOT(OnProgressUpdate(int)), Qt::QueuedConnection);
 
-	m_fTerminate = false;
-	
 	start();
 
 	m_pProgress->exec();
@@ -158,7 +156,7 @@ void CLogFileFlt::InsertRecord(qint64 nOffset)
 
 	m_nFSize = m_pFile->size() / sizeof(qint64);
 
-	m_nSSize = m_nFSize > DEFAULT_ROWSCOUNT ? DEFAULT_ROWSCOUNT : (int)m_nFSize;
+	m_nSSize = m_nFSize > DEFAULT_ROWSCOUNT ? DEFAULT_ROWSCOUNT : m_nFSize;
 
 }
 
