@@ -99,7 +99,7 @@ CFileDialog::~CFileDialog()
 QString CFileDialog::PromptFileName(QWidget *pParent, bool fSave, QString sName, QString sPath, bool fStaticFolder)
 {
 
-	CFileDialog pDlg(fSave, sPath, pParent);
+	CFileDialog pDlg(fSave, sPath, false, pParent);
 	//pDlg.setWindowModality(Qt::WindowModal);
 	//pDlg.open();
 	//pDlg.show();
