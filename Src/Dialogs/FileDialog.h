@@ -25,10 +25,10 @@ class CFileDialog : public QDialog
 
 public:
 
-	explicit CFileDialog(bool fSave, QString sPath, QWidget *parent = nullptr);
+	explicit CFileDialog(bool fSave, QString sPath, bool fStaticFolder, QWidget *parent = nullptr);
 	~CFileDialog();
 
-	static QString PromptFileName(QWidget *pParent, bool fSave, QString sName, QString sPath);
+	static QString PromptFileName(QWidget *pParent, bool fSave, QString sName, QString sPath, bool fStaticFolder);
 
 	QString GetPath() {
 		return m_sPath;
@@ -39,6 +39,8 @@ private:
 	Ui::CFileDialog *ui;
 
 	QString m_sPath;
+	
+	bool m_fStaticFolder;
 
 	QFileSystemModel *m_pModel;
 

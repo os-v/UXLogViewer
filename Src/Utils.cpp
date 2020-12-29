@@ -98,3 +98,15 @@ void FontSet(QWidget *pWidget, bool fRecursive, QFont *pFont)
 	}
 }
 
+int StrArrayFindIndex(const char **pArray, int nStart, int nCount, const ushort *sValueText)
+{
+	for(int iItem = nStart; iItem < nCount; iItem++)
+	{
+		const char *pItemPtr = pArray[iItem];
+		const ushort *pValuePtr = sValueText;
+		for(int iChar = 0; *pItemPtr && *pValuePtr && *pItemPtr == *pValuePtr; iChar++, pItemPtr++, pValuePtr++);
+		if(!*pItemPtr)
+			return iItem;
+	}
+	return -1;
+}
