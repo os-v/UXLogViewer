@@ -24,8 +24,6 @@ CAboutDialog::CAboutDialog(QWidget *parent) :
 
 	//setWindowFlags(windowFlags() | Qt::MSWindowsFixedSizeDialogHint);
 
-	QString sText = StrFormat("dpix:%d, dpiy:%d, dpi:%f", qApp->desktop()->logicalDpiX(), qApp->desktop()->logicalDpiY(), QApplication::primaryScreen()->logicalDotsPerInch());
-	ui->m_pLabelText->setText(sText);
 	QString sMessage = StrFormat("<html><body>UXLogViewer v%s<br><br>%s<br><br><a href='%s'>%s</a></body></html>", PRODUCT_SVERSION, PRODUCT_LEGALCOPYRIGHT, PRODUCT_COMPANYNAME, PRODUCT_COMPANYNAME);
 	ui->m_pLabelText->setText(sMessage);
 

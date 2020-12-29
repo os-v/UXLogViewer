@@ -27,13 +27,13 @@ int main(int argc, char *argv[])
 
 	QApplication pApp(argc, argv);
 
-	ScaleSet(0);
+	QApplication::setWindowIcon(QIcon(":/Resources/LogView.png"));
 
 	CAppConfig::Instance().Load();
 
-	FontInit();
+	ScaleSet(0);
 
-	QApplication::setWindowIcon(QIcon(":/Resources/LogView.png"));
+	FontInit();
 
 	CLogTheme::Instance().UpdateThemes(CAppConfig::Instance().ThemeDefs);
 	CLogTheme::Instance().Select(CAppConfig::Instance().ThemeSelected);

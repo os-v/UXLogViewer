@@ -70,10 +70,10 @@ private:
 
 	Ui::CLogWidget *ui;
 
-	CLogFileRaw *m_pLogFileRaw;
-	CLogFileFlt *m_pLogFileFlt;
 	CLogModel *m_pLogModel;
 	CLogWidget *m_pFiltered;
+	CLogFileRaw *m_pLogFileRaw;
+	CLogFileFlt *m_pLogFileFlt;
 
 	qint64 m_nSelected;
 

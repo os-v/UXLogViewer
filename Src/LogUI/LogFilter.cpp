@@ -197,7 +197,7 @@ CLogFilter::CExprBase *CLogFilter::Build(QVector<int> &pToken, QStringList &pIde
 		}
 		else
 		{
-			m_sError = "Invalid token: " + QString::number(eCurr) + ", " + sCurr;
+			m_sError = "Invalid token: " + QString::number(eCurr) + " [" + sCurr + "]";
 			break;
 		}
 		if (fUnary)

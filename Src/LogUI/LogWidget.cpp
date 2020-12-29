@@ -32,9 +32,9 @@ CLogWidget::CLogWidget(QWidget *parent, int nID, bool fSearchBar, CLogWidget *pF
 	m_nViewID = nID;
 
 	m_pFiltered = pFiltered;
+	m_pLogModel = new CLogModel(GetLogFile());
 	m_pLogFileRaw = new CLogFileRaw();
 	m_pLogFileFlt = new CLogFileFlt();
-	m_pLogModel = new CLogModel(GetLogFile());
 
 	m_nSelected = -1;
 

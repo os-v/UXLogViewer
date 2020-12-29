@@ -77,7 +77,7 @@
       </size>
      </property>
      <property name="text">
-      <string>UXLogViewer v1.0</string>
+      <string>UXLogViewer v1.0.1</string>
      </property>
      <property name="textFormat">
       <enum>Qt::AutoText</enum>

@@ -28,7 +28,7 @@ public:
 	explicit CFileDialog(bool fSave, QString sPath, bool fStaticFolder, QWidget *parent = nullptr);
 	~CFileDialog();
 
-	static QString PromptFileName(QWidget *pParent, bool fSave, QString sName, QString sPath, bool fStaticFolder);
+	static QString PromptFileName(QWidget *pParent, bool fSave, QString sName, QString sPath, bool fStaticFolder = false);
 
 	QString GetPath() {
 		return m_sPath;

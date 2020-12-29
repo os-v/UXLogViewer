@@ -7,8 +7,8 @@
 //  Copyright 2020 Sergii Oryshchenko. All rights reserved.
 //
 
-#ifndef LOGFLTPARSE_H
-#define LOGFLTPARSE_H
+#ifndef LOGFILTER_H
+#define LOGFILTER_H
 
 #include "../Utils.h"
 #include <QRegularExpression>

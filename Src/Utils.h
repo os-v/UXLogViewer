@@ -17,12 +17,12 @@
 	#include <strings.h>
 #endif
 
-#define ARRAY_SIZE(p)	(sizeof(p)/sizeof(p[0]))
+#define ARRAY_SIZE(p)		(sizeof(p) / sizeof(p[0]))
 
 #define CArray			QVector
 #define CIntArray		CArray<int>
 
-#define SafeDelete(x)	if(x) { delete x; x = 0; }
+#define SafeDelete(x)		if(x) { delete x; x = 0; }
 
 class QFont;
 class QWidget;

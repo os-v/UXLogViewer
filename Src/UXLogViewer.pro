@@ -71,6 +71,7 @@ RESOURCES += \
 
 android {
     ANDROID_PACKAGE_SOURCE_DIR = $$PWD/Platforms/Android
+    ANDROID_ABIS = armeabi-v7a
 }
 
 macx:!ios {
@@ -93,5 +94,3 @@ win32 {
 
 unix:!macx {
 }
-
-ANDROID_ABIS = armeabi-v7a

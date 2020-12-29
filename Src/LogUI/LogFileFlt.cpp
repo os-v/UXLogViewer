@@ -107,7 +107,6 @@ void CLogFileFlt::ProcessData(bool fSave)
 {
 
 	QProgressDialog pProgress(QApplication::activeWindow());
-	//pProgress.setWindowIcon(QApplication::activeWindow()->windowIcon());
 	m_pProgress = &pProgress;
 	//m_pProgress->setWindowModality(Qt::WindowModal);
 	m_pProgress->setModal(true);
@@ -154,7 +153,6 @@ void CLogFileFlt::InsertRecord(qint64 nOffset)
 	QByteArray &pBuffer = ((QBuffer*)m_pFile)->buffer();
 
 	QInsertValue(pBuffer, nOffset, true);
-	//pBuffer.append((char*)&nOffset, sizeof(nOffset));
 
 	m_nFSize = m_pFile->size() / sizeof(qint64);
 

@@ -66,7 +66,7 @@ CFileDialog::CFileDialog(bool fSave, QString sPath, bool fStaticFolder, QWidget 
 	pProxy->setSourceModel(m_pModel);
 	pProxy->setSortCaseSensitivity(Qt::CaseInsensitive);
 	pProxy->sort(0);
-	ui->m_pListView->setModel(pProxy);//m_pModel);
+	ui->m_pListView->setModel(pProxy);
 	ui->m_pListView->setRootIndex(pProxy->mapFromSource(m_pModel->index(sPath)));
 	ui->m_pEditPath->setText(sPath);
 

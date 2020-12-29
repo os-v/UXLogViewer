@@ -104,7 +104,7 @@ int StrArrayFindIndex(const char **pArray, int nStart, int nCount, const ushort 
 	{
 		const char *pItemPtr = pArray[iItem];
 		const ushort *pValuePtr = sValueText;
-		for(int iChar = 0; *pItemPtr && *pValuePtr && *pItemPtr == *pValuePtr; iChar++, pItemPtr++, pValuePtr++);
+		for(; *pItemPtr && *pValuePtr && *pItemPtr == *pValuePtr; pItemPtr++, pValuePtr++);
 		if(!*pItemPtr)
 			return iItem;
 	}
