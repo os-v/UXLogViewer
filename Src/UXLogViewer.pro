@@ -72,6 +72,9 @@ RESOURCES += \
 android {
     ANDROID_PACKAGE_SOURCE_DIR = $$PWD/Platforms/Android
     ANDROID_ABIS = armeabi-v7a
+    ANDROID_EXTRA_LIBS += \
+        $$PWD/Platforms/Android/libs/libcrypto_1_1.so \
+        $$PWD/Platforms/Android/libs/libssl_1_1.so
 }
 
 macx:!ios {
@@ -94,3 +97,4 @@ win32 {
 
 unix:!macx {
 }
+
