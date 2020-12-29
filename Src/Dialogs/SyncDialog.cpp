@@ -158,7 +158,7 @@ bool CSyncDialog::SendRequest(QString sURL, QJsonDocument &pRequestData, QJsonDo
 	for(int nProgress = 0; !m_fResponse; nProgress++, SleepMS(10))
 	{
 		QCoreApplication::instance()->processEvents(QEventLoop::ExcludeUserInputEvents, 10);
-		pProgress.setValue(nProgress / 100);
+		pProgress.setValue(nProgress < 100 * 100 ? nProgress / 100 : 99);
 	}
 
 	bool fResult = pReply->error() == QNetworkReply::NoError;
