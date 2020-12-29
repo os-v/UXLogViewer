@@ -115,6 +115,9 @@ void CSyncDialog::accept()
 QString CSyncDialog::EncryptPassword(QString sUsername, QString sPassword)
 {
 
+	if(sPassword.isEmpty())
+		return "";
+
 	QByteArray pUsername = sUsername.toLatin1();
 	QByteArray pPassword = sPassword.toLatin1();
 
@@ -152,10 +155,10 @@ bool CSyncDialog::SendRequest(QString sURL, QJsonDocument &pRequestData, QJsonDo
 
 	QObject::connect(&pAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(OnRequestFinished(QNetworkReply*)));
 
-	for( ; !m_fResponse; SleepMS(10))
+	for(int nProgress = 0; !m_fResponse; nProgress++, SleepMS(10))
 	{
 		QCoreApplication::instance()->processEvents(QEventLoop::ExcludeUserInputEvents, 10);
-		pProgress.setValue(pProgress.value() + 1);
+		pProgress.setValue(nProgress / 100);
 	}
 
 	bool fResult = pReply->error() == QNetworkReply::NoError;
