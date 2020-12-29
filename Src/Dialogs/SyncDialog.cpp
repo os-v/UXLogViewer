@@ -90,7 +90,7 @@ void CSyncDialog::accept()
 			sError = pResponseObject["error"].toString();
 		else if(!pResponseObject.contains("themes") || !pResponseObject.contains("active"))
 			sError = "Invalid response";
-		else if(!fToServer)
+		if(!fToServer && sError.isEmpty())
 		{
 			QString pThemeDefs = pResponseObject["themes"].toVariant().toString();
 			if(pThemeDefs.length())

@@ -15,6 +15,7 @@
 #include "LogUI/LogWidget.h"
 #include "LogUI/LogFile.h"
 #include "LogUI/LogTheme.h"
+#include "AppConfig.h"
 
 namespace Ui {
 	class CMainWindow;

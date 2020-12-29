@@ -22,7 +22,6 @@
 #include "Dialogs/MessageDialog.h"
 #include "Dialogs/AboutDialog.h"
 #include "ProductInfo.h"
-#include "AppConfig.h"
 #include <QStandardPaths>
 
 CMainWindow::CMainWindow(QWidget *parent) :
