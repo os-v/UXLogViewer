@@ -42,7 +42,7 @@ protected:
 	}
 };
 
-CFileDialog::CFileDialog(bool fSave, QString sPath, QWidget *parent) :
+CFileDialog::CFileDialog(bool fSave, QString sPath, bool fStaticFolder, QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::CFileDialog)
 {
@@ -51,6 +51,8 @@ CFileDialog::CFileDialog(bool fSave, QString sPath, QWidget *parent) :
 
 	ui->m_pEditName->setVisible(fSave);
 
+	m_fStaticFolder = fStaticFolder;
+	
 	if(sPath.isEmpty())
 		sPath = QDir::currentPath();
 
@@ -77,6 +79,12 @@ CFileDialog::CFileDialog(bool fSave, QString sPath, QWidget *parent) :
 
 	ui->m_pListView->setFont(ui->m_pEditPath->font());
 
+	if(fStaticFolder)
+	{
+		ui->m_pEditPath->setEnabled(false);
+		ui->m_pButtonUp->setEnabled(false);
+	}
+	
 	FontSet(this, true);
 
 }
@@ -88,7 +96,7 @@ CFileDialog::~CFileDialog()
 
 }
 
-QString CFileDialog::PromptFileName(QWidget *pParent, bool fSave, QString sName, QString sPath)
+QString CFileDialog::PromptFileName(QWidget *pParent, bool fSave, QString sName, QString sPath, bool fStaticFolder)
 {
 
 	CFileDialog pDlg(fSave, sPath, pParent);

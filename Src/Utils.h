@@ -17,6 +17,8 @@
 	#include <strings.h>
 #endif
 
+#define ARRAY_SIZE(p)	(sizeof(p)/sizeof(p[0]))
+
 #define CArray			QVector
 #define CIntArray		CArray<int>
 
@@ -37,6 +39,7 @@ void FontDel();
 void FontSet(QFont *pFont, QFont *pFixed);
 QFont *FontGet(bool fFixed = false);
 void FontSet(QWidget *pWidget, bool fRecursive, QFont *pFont = 0);
+int StrArrayFindIndex(const char **pArray, int nStart, int nCount, const ushort *sValueText);
 
 template<class TItem> int ArrayFindIndex(TItem *pArray, int nCount, TItem pValue)
 {
