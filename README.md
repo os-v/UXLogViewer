@@ -33,7 +33,7 @@ This software is distributed under the [GPL 3.0](https://github.com/os-v/UXLogVi
 <p align="center">
 	<img alt="Windows" src="https://user-images.githubusercontent.com/73893487/103376282-d334a480-4b0e-11eb-911f-f72e6d1535af.png"/>
 	<img alt="Ubuntu" src="https://user-images.githubusercontent.com/73893487/103376284-d465d180-4b0e-11eb-906e-aefe25585e48.png"/>
-	<img alt="iPhone" src="https://user-images.githubusercontent.com/73893487/103376286-d62f9500-4b0e-11eb-82ec-cd364e9665b0.png"/>
+	<img alt="iPhone" src="https://user-images.githubusercontent.com/73893487/103376525-72f23280-4b0f-11eb-9754-d0ff84635594.png"/>
 </p>
 
 
