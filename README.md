@@ -30,7 +30,11 @@
 This software is distributed under the [GPL 3.0](https://github.com/os-v/UXLogViewer/blob/master/LICENSE) license. Please read LICENSE for information on the software availability and distribution.
 
 ## Screenshots
-
+<p align="center">
+	<img alt="Windows" src="https://user-images.githubusercontent.com/73893487/103376282-d334a480-4b0e-11eb-911f-f72e6d1535af.png"/>
+	<img alt="Ubuntu" src="https://user-images.githubusercontent.com/73893487/103376284-d465d180-4b0e-11eb-906e-aefe25585e48.png"/>
+	<img alt="iPhone" src="https://user-images.githubusercontent.com/73893487/103376286-d62f9500-4b0e-11eb-82ec-cd364e9665b0.png"/>
+</p>
 
 
 
