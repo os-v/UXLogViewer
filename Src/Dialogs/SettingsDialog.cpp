@@ -23,6 +23,7 @@ CSettingsDialog::CSettingsDialog(QWidget *parent) :
 
 	ui->m_pCheckFileOpenUI->setChecked(pConfig.FileOpenUI);
 	ui->m_pCheckFileSaveUI->setChecked(pConfig.FileSaveUI);
+	ui->m_pCheckStrictFilter->setChecked(pConfig.StrictFilter);
 
 	for(int iFontSize = 8; iFontSize <= 32; iFontSize++)
 	{
@@ -56,6 +57,7 @@ void CSettingsDialog::accept()
 
 	pConfig.FileOpenUI = ui->m_pCheckFileOpenUI->isChecked();
 	pConfig.FileSaveUI = ui->m_pCheckFileSaveUI->isChecked();
+	pConfig.StrictFilter = ui->m_pCheckStrictFilter->isChecked();
 	pConfig.FontSizeMain = ui->m_pFontUI->currentIndex() + 8;
 	pConfig.FontSizeFixed = ui->m_pFontLog->currentIndex() + 8;
 

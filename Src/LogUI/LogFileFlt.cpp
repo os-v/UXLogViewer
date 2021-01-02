@@ -52,7 +52,7 @@ CLogFileFlt::~CLogFileFlt()
 
 }
 
-bool CLogFileFlt::Create(ILogFile *pLogFile, QString sQuery, int nFrame, bool fMemFile)
+bool CLogFileFlt::Create(ILogFile *pLogFile, QString sQuery, int nFrame, bool fMemFile, bool fStrict)
 {
 
 	Destroy();
@@ -60,7 +60,7 @@ bool CLogFileFlt::Create(ILogFile *pLogFile, QString sQuery, int nFrame, bool fM
 	m_pLogFile = pLogFile;
 	m_pTheme = m_pLogFile->GetTheme();
 	m_pFile = fMemFile ? (QIODevice*)new QBuffer() : (QIODevice*)new QTemporaryFile();
-	if(!m_pTheme || /*!fMemFile && */!((QTemporaryFile*)m_pFile)->open() || !sQuery.isEmpty() && !m_pFilter.Load(sQuery, m_pTheme))
+	if(!m_pTheme || /*!fMemFile && */!((QTemporaryFile*)m_pFile)->open() || !sQuery.isEmpty() && !m_pFilter.Load(sQuery, m_pTheme, fStrict))
 		return false;
 
 	if(pLogFile->IsFilter(false))

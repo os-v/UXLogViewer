@@ -22,7 +22,7 @@ public:
 	CLogFilter();
 	~CLogFilter();
 
-	bool Load(QString sFilter, CLogTheme *pTheme);
+	bool Load(QString sFilter, CLogTheme *pTheme, bool fStrict);
 
 	bool Check(QString *pRecord);
 
@@ -178,6 +178,7 @@ protected:
 	QString **m_pField;
 
 	QString m_sError;
+	QString m_sFilter;
 	CExprBase *m_pExpression;
 
 	CLogTheme *m_pTheme;

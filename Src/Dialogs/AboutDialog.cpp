@@ -12,7 +12,6 @@
 #include "../ProductInfo.h"
 #include "../Utils.h"
 #include "../AppConfig.h"
-#include <QDesktopWidget>
 #include <QScreen>
 
 CAboutDialog::CAboutDialog(QWidget *parent) :

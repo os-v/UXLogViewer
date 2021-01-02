@@ -23,6 +23,7 @@
 #define KEY_DOCKFLOAT			"DockFloat"
 #define KEY_FILEOPENUI			"FileOpenUI"
 #define KEY_FILESAVEUI			"FileSaveUI"
+#define KEY_STRICTFILTER		"StrictFilter"
 
 #define KEY_FONTSIZEMAIN		"FontSizeMain"
 #define KEY_FONTSIZEFIXED		"FontSizeFixed"
@@ -60,6 +61,7 @@ CAppConfig::CAppConfig()
 
 	FileOpenUI = false;
 	FileSaveUI = false;
+	StrictFilter = false;
 
 #ifdef _WIN32
 	FontSizeMain = 8;
@@ -109,6 +111,7 @@ void CAppConfig::Load(QString sPath)
 
 	FileOpenUI = m_pSettings->value(KEY_FILEOPENUI, FileOpenUI).toBool();
 	FileSaveUI = m_pSettings->value(KEY_FILESAVEUI, FileSaveUI).toBool();
+	StrictFilter = m_pSettings->value(KEY_STRICTFILTER, FileSaveUI).toBool();
 
 	FontSizeMain = m_pSettings->value(KEY_FONTSIZEMAIN, FontSizeMain).toInt();
 	FontSizeFixed = m_pSettings->value(KEY_FONTSIZEFIXED, FontSizeFixed).toInt();
@@ -146,6 +149,7 @@ void CAppConfig::Save()
 
 	m_pSettings->setValue(KEY_FILEOPENUI, FileOpenUI);
 	m_pSettings->setValue(KEY_FILESAVEUI, FileSaveUI);
+	m_pSettings->setValue(KEY_STRICTFILTER, StrictFilter);
 
 	m_pSettings->setValue(KEY_FONTSIZEMAIN, FontSizeMain);
 	m_pSettings->setValue(KEY_FONTSIZEFIXED, FontSizeFixed);

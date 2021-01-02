@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 	QApplication::setPalette(QApplication::style()->standardPalette());
 
 	QApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
-	QApplication::setAttribute(Qt::AA_DisableWindowContextHelpButton);
+	//QApplication::setAttribute(Qt::AA_DisableWindowContextHelpButton);
 
 	QApplication pApp(argc, argv);
 

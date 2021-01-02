@@ -13,6 +13,7 @@
 #include <QThread>
 #include <QtWidgets>
 #include <QFont>
+#include <QScreen>
 #include "AppConfig.h"
 
 float GScaleFactor = 1.0;
@@ -31,7 +32,7 @@ void ScaleSet(float fValue)
 {
 	if(fValue == 0)
 	{
-		float nDPIX = QApplication::desktop()->logicalDpiX();
+        float nDPIX = QGuiApplication::primaryScreen()->logicalDotsPerInch();
 		if(nDPIX <= 96)
 			nDPIX = 100;
 		if(nDPIX == 120)

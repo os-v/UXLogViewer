@@ -11,7 +11,7 @@
 #include "ui_LogWidget.h"
 #include "LogTheme.h"
 #include "LogModel.h"
-#include "AppConfig.h"
+#include "../AppConfig.h"
 #include <QScrollBar>
 #include <QLineEdit>
 #include <QClipboard>
@@ -210,7 +210,7 @@ bool CLogWidget::ApplyFilter(QString sFilter)
 	m_pLogModel->UpdateView(0, DEFAULT_ROWSCOUNT);
 	int nFrameSize = ui->m_pTreeView->GetVisibleRowsCount();
 
-	if(sFilter == "" || !m_pLogFileFlt->Create(m_pFiltered ? m_pFiltered->GetLogFile() : m_pLogFileRaw, sFilter, nFrameSize))
+	if(sFilter == "" || !m_pLogFileFlt->Create(m_pFiltered ? m_pFiltered->GetLogFile() : m_pLogFileRaw, sFilter, nFrameSize, false, CAppConfig::Instance().StrictFilter))
 	{
 		m_pLogFileFlt->Reset();
 		m_pLogFileRaw->MoveTo(0);

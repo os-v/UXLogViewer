@@ -33,7 +33,7 @@ public:
 	CLogFileFlt();
 	~CLogFileFlt();
 
-	bool Create(ILogFile *pLogFile, QString sQuery, int nFrame, bool fMemFile = false);
+	bool Create(ILogFile *pLogFile, QString sQuery, int nFrame, bool fMemFile = false, bool fStrict = false);
 	void Destroy();
 
 	void UpdateTheme(CLogTheme *pTheme);
