@@ -5,7 +5,7 @@
 <p>
 	<a href="https://github.com/os-v/UXLogViewer/files/5751753/UXLogViewer-1.0.1-Android.zip">Android (zipped APK)</a><br>
 	<a href="https://github.com/os-v/UXLogViewer/files/5751495/UXLogViewer-1.0.1-iOS.zip">iOS (zipped IPA)</a><br>
-	<a href="https://github.com/os-v/UXLogViewer/files/5759849/UXLogViewer-1.0.1-MacOS.zip">OSX</a><br>
+	<a href="https://github.com/os-v/UXLogViewer/files/5768245/UXLogViewer-1.0.1-MacOS.zip">OSX</a><br>
 	<a href="https://github.com/os-v/UXLogViewer/files/5751307/UXLogViewer-1.0.1-Windows.zip">Windows</a><br>
 	<a href="https://github.com/os-v/UXLogViewer/files/5751853/UXLogViewer-1.0.1-Ubuntu.zip">Ubuntu</a><br>
 	<a href="https://github.com/os-v/UXLogViewer/files/5751292/UXLogViewer-1.0.1-FreeBSD.zip">FreeBSD</a><br>
