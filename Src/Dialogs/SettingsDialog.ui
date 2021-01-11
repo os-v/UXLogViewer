@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>215</height>
+    <height>196</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -28,13 +28,6 @@
     <widget class="QCheckBox" name="m_pCheckFileSaveUI">
      <property name="text">
       <string>Custom file save UI</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="m_pCheckStrictFilter">
-     <property name="text">
-      <string>Use Strict filter</string>
      </property>
     </widget>
    </item>

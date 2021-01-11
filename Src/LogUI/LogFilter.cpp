@@ -39,7 +39,7 @@ CLogFilter::~CLogFilter()
 
 }
 
-bool CLogFilter::Load(QString sFilter, CLogTheme *pTheme, bool fStrict)
+bool CLogFilter::Load(QString sFilter, CLogTheme *pTheme)
 {
 
 	m_sError = "";
@@ -57,15 +57,20 @@ bool CLogFilter::Load(QString sFilter, CLogTheme *pTheme, bool fStrict)
 	QVector<int> pToken;
 	QStringList pIdent;
 
-	if(!Parse(sFilter, pToken, pIdent) || !pToken.size())
-		return !fStrict;
-
+	m_pRegExp = QRegularExpression();
 	if(m_pExpression)
+	{
 		m_pExpression->Destroy();
+		m_pExpression = 0;
+	}
 
-	m_pExpression = Build(pToken, pIdent, 0, 0, false);
+	if(Parse(sFilter, pToken, pIdent) || !pToken.size())
+		m_pExpression = Build(pToken, pIdent, 0, 0, false);
 
-	return m_pExpression ? true : !fStrict;
+	if(!m_pExpression)
+		m_pRegExp = QRegularExpression(sFilter, QRegularExpression::CaseInsensitiveOption);
+
+	return m_pExpression || m_pRegExp.isValid();
 }
 
 bool CLogFilter::Check(QString *pRecord)
@@ -74,10 +79,10 @@ bool CLogFilter::Check(QString *pRecord)
 	for(int iField = 0; iField < m_pTheme->GetColCount(); iField++)
 		m_pField[iField] = &pRecord[iField];
 
-	if(!m_pExpression)
-		return m_pField[m_pTheme->GetColCount() - 1]->contains(m_sFilter, Qt::CaseInsensitive);
+	if(m_pExpression)
+		return m_pExpression->Evaluate();
 
-	return m_pExpression->Evaluate();
+	return m_pRegExp.match(*m_pField[m_pTheme->GetColCount() - 1]).hasMatch();
 }
 
 bool CLogFilter::Parse(QString &sFilter, QVector<int> &pToken, QStringList &pIdent)

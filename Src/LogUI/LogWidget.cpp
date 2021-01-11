@@ -210,7 +210,7 @@ bool CLogWidget::ApplyFilter(QString sFilter)
 	m_pLogModel->UpdateView(0, DEFAULT_ROWSCOUNT);
 	int nFrameSize = ui->m_pTreeView->GetVisibleRowsCount();
 
-	if(sFilter == "" || !m_pLogFileFlt->Create(m_pFiltered ? m_pFiltered->GetLogFile() : m_pLogFileRaw, sFilter, nFrameSize, false, CAppConfig::Instance().StrictFilter))
+	if(sFilter == "" || !m_pLogFileFlt->Create(m_pFiltered ? m_pFiltered->GetLogFile() : m_pLogFileRaw, sFilter, nFrameSize, false))
 	{
 		m_pLogFileFlt->Reset();
 		m_pLogFileRaw->MoveTo(0);
@@ -597,7 +597,8 @@ void CLogWidget::OnSearchTriggered()
 		CAppConfig::Instance().GetFilterSearch(m_nViewID).push_front(sFilter);
 		ui->m_pComboSearch->insertItem(0, sFilter);
 		ui->m_pComboSearch->setCurrentIndex(0);
-		ui->m_pTreeView->setFocus();
+		if(CAppConfig::IsMobile)
+			ui->m_pTreeView->setFocus();
 	}
 
 }

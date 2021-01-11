@@ -46,7 +46,6 @@ public:
 
 	bool FileOpenUI;
 	bool FileSaveUI;
-	bool StrictFilter;
 
 	int FontSizeMain;
 	int FontSizeFixed;
