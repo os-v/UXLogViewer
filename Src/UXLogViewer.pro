@@ -88,7 +88,6 @@ ios: {
     app_launch_images.files = $$PWD/Platforms/iOS/LauncherScreen.xib $$files($$PWD/Platforms/iOS/LaunchImage*.png) $$files($$PLATFORMS_DIR/iOS/SplashImage*.png)
     QMAKE_BUNDLE_DATA += app_launch_images
     QMAKE_INFO_PLIST = $$PWD/Platforms/iOS/Info.plist
-
 }
 
 win32 {

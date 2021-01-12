@@ -1,3 +1,11 @@
+#
+#  @file BuildDMG.sh
+#  @author Sergii Oryshchenko <sergii.orishchenko@gmail.com>
+#  @see https://github.com/os-v/UXLogViewer/
+#
+#  Created on 05.01.21.
+#  Copyright 2021 Sergii Oryshchenko. All rights reserved.
+#
 
 CurDir=$(cd "$(dirname "$0")"; pwd)
 

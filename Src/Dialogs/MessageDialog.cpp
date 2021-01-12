@@ -10,6 +10,8 @@
 #include "MessageDialog.h"
 #include "ui_MessageDialog.h"
 #include <QXmlStreamReader>
+#include <QMenu>
+#include <QDebug>
 #include "../Utils.h"
 
 CMessageDialog::CMessageDialog(QString sMessage, QWidget *parent) :
@@ -19,11 +21,13 @@ CMessageDialog::CMessageDialog(QString sMessage, QWidget *parent) :
 
 	ui->setupUi(this);
 
-	ui->m_pEditMessage->setText(sMessage);
+	ui->m_pEditMessage->setPlainText(sMessage);
 
 	FontSet(this, true);
 
 	ui->m_pEditMessage->setFont(*FontGet(true));
+
+	connect(ui->m_pEditMessage, SIGNAL(selectionChanged()), this, SLOT(OnSelectionChanged()));
 
 }
 
@@ -33,3 +37,21 @@ CMessageDialog::~CMessageDialog()
 	delete ui;
 
 }
+
+void CMessageDialog::OnSelectionChanged()
+{
+
+	if(QApplication::mouseButtons() != Qt::NoButton)
+		return;
+
+	QTextCursor pTextCursor = ui->m_pEditMessage->textCursor();
+	if(pTextCursor.selectedText().isEmpty())
+		return;
+
+	QPoint ptPos = QCursor::pos();
+	QMenu *pMenu = ui->m_pEditMessage->createStandardContextMenu();
+	pMenu->exec(ptPos);
+	delete pMenu;
+
+}
+

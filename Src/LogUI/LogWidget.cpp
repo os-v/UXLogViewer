@@ -63,6 +63,7 @@ CLogWidget::CLogWidget(QWidget *parent, int nID, bool fSearchBar, CLogWidget *pF
 
 	connect(ui->m_pComboSearch->lineEdit(), SIGNAL(returnPressed()), this, SLOT(OnSearchTriggered()), Qt::QueuedConnection);
 
+	ui->m_pComboSearch->lineEdit()->setPlaceholderText("Please enter filter");
 	ui->m_pComboSearch->addItems(CAppConfig::Instance().GetFilterSearch(m_nViewID));
 
 	if(!fSearchBar)

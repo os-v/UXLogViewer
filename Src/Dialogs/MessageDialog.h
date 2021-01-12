@@ -28,6 +28,10 @@ private:
 
 	Ui::CMessageDialog *ui;
 
+private slots:
+
+	void OnSelectionChanged();
+
 };
 
 #endif

@@ -80,7 +80,11 @@
     </widget>
    </item>
    <item>
-    <widget class="QLineEdit" name="m_pEditName"/>
+    <widget class="QLineEdit" name="m_pEditName">
+     <property name="placeholderText">
+      <string>Please enter filename</string>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="m_pButtonsDialog">
