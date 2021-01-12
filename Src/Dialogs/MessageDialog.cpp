@@ -50,6 +50,7 @@ void CMessageDialog::OnSelectionChanged()
 
 	QPoint ptPos = QCursor::pos();
 	QMenu *pMenu = ui->m_pEditMessage->createStandardContextMenu();
+	FontSet(pMenu, true);
 	pMenu->exec(ptPos);
 	delete pMenu;
 
