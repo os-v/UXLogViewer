@@ -31,10 +31,12 @@ This software is distributed under the [GPL 3.0](https://github.com/os-v/UXLogVi
 
 ## Screenshots
 <p align="center">
-	<img alt="Windows" src="https://user-images.githubusercontent.com/73893487/103376282-d334a480-4b0e-11eb-911f-f72e6d1535af.png"/>
-	<img alt="MacOS" src="https://user-images.githubusercontent.com/73893487/103451836-7ea24c80-4cfb-11eb-9567-5bc59cb808e0.png"/>
-	<img alt="Ubuntu" src="https://user-images.githubusercontent.com/73893487/103376284-d465d180-4b0e-11eb-906e-aefe25585e48.png"/>
-	<img alt="iPhone" src="https://user-images.githubusercontent.com/73893487/103376525-72f23280-4b0f-11eb-9754-d0ff84635594.png"/>
+	<img alt="Android" src="https://user-images.githubusercontent.com/73893487/104474505-a98c7a80-55f0-11eb-938e-dcd7bc1b933f.png" width="540" height="960"/>
+	<img alt="iOS" src="https://user-images.githubusercontent.com/73893487/104474516-ad200180-55f0-11eb-832d-863a3abf1702.png" width="540" height="960"/>
+	<img alt="MacOS" src="https://user-images.githubusercontent.com/73893487/104474524-ae512e80-55f0-11eb-927d-fb19ae06ca9e.png"/>
+	<img alt="Windows" src="https://user-images.githubusercontent.com/73893487/104474534-b01af200-55f0-11eb-991d-2a29f2e34000.png"/>
+	<img alt="Ubuntu" src="https://user-images.githubusercontent.com/73893487/104474530-aee9c500-55f0-11eb-8a2a-4b3c7c1c2c33.png"/>
+	<img alt="FreeBSD" src="https://user-images.githubusercontent.com/73893487/104474511-abeed480-55f0-11eb-887f-eb572b7eca9e.png"/>
 </p>
 
 
