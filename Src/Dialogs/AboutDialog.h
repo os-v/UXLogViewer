@@ -11,6 +11,7 @@
 #define ABOUTDIALOG_H
 
 #include <QDialog>
+#include <QElapsedTimer>
 
 namespace Ui {
 	class CAboutDialog;
@@ -29,6 +30,11 @@ public:
 private:
 
 	Ui::CAboutDialog *ui;
+
+	QElapsedTimer m_pElapsedTimer;
+
+	virtual void mousePressEvent(QMouseEvent *event);
+	virtual void mouseReleaseEvent(QMouseEvent *event);
 
 };
 

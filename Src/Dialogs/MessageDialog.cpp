@@ -21,7 +21,13 @@ CMessageDialog::CMessageDialog(QString sMessage, QWidget *parent) :
 
 	ui->setupUi(this);
 
-	ui->m_pEditMessage->setPlainText(sMessage);
+	if(LogIsEnabled())
+	{
+		ui->m_pEditMessage->setPlainText(LogMessages());
+		ui->m_pEditMessage->setWordWrapMode(QTextOption::NoWrap);
+	}
+	else
+		ui->m_pEditMessage->setPlainText(sMessage);
 
 	FontSet(this, true);
 

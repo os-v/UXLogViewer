@@ -16,10 +16,44 @@
 #include <QScreen>
 #include "AppConfig.h"
 
+bool GLogEnabled = false;
+QString GLogMessages;
+
 float GScaleFactor = 1.0;
 
 QFont *GFontMain = 0;
 QFont *GFontFixed = 0;
+
+bool LogIsEnabled()
+{
+	return GLogEnabled;
+}
+
+void LogEnable(bool fEnable)
+{
+	GLogEnabled = fEnable;
+	if(!fEnable)
+		GLogMessages = "";
+}
+
+QString &LogMessages()
+{
+	return GLogMessages;
+}
+
+void LogMessage(const char *lpFmt, ...)
+{
+	if(!GLogEnabled)
+		return;
+	va_list args;
+	va_start(args, lpFmt);
+	QString sMessage;
+	sMessage.vsprintf(lpFmt, args);
+	va_end(args);
+	QString sTime = StrFormat("%d", QDateTime::currentMSecsSinceEpoch() - QDateTime(QDate::currentDate()).toMSecsSinceEpoch());
+	GLogMessages += sTime + ": " + sMessage + "\n";
+	qDebug() << sMessage;
+}
 
 void SleepMS(unsigned long nValue)
 {
@@ -32,7 +66,7 @@ void ScaleSet(float fValue)
 {
 	if(fValue == 0)
 	{
-        float nDPIX = QGuiApplication::primaryScreen()->logicalDotsPerInch();
+		float nDPIX = QGuiApplication::primaryScreen()->logicalDotsPerInch();
 		if(nDPIX <= 96)
 			nDPIX = 100;
 		if(nDPIX == 120)

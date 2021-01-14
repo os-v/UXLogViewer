@@ -13,6 +13,7 @@
 #include "../Utils.h"
 #include "../AppConfig.h"
 #include <QScreen>
+#include <QDebug>
 
 CAboutDialog::CAboutDialog(QWidget *parent) :
 	QDialog(parent),
@@ -33,6 +34,13 @@ CAboutDialog::CAboutDialog(QWidget *parent) :
 	//else
 		//layout()->removeItem(ui->m_pVerticalSpacerMobile);
 
+	if(LogIsEnabled())
+	{
+		QImage pImage(":/Resources/LogView.png");
+		pImage = pImage.convertToFormat(QImage::Format_Mono);
+		ui->m_pImage->setPixmap(QPixmap::fromImage(pImage));
+	}
+
 }
 
 CAboutDialog::~CAboutDialog()
@@ -41,3 +49,26 @@ CAboutDialog::~CAboutDialog()
 	delete ui;
 
 }
+
+void CAboutDialog::mousePressEvent(QMouseEvent *event)
+{
+
+	m_pElapsedTimer.start();
+
+}
+
+void CAboutDialog::mouseReleaseEvent(QMouseEvent *event)
+{
+
+	if(m_pElapsedTimer.elapsed() >=LOG_TRIGGERTIME)
+	{
+		bool fLogEnabled = !LogIsEnabled();
+		LogEnable(fLogEnabled);
+		QImage pImage(":/Resources/LogView.png");
+		if(fLogEnabled)
+			pImage = pImage.convertToFormat(QImage::Format_Mono);
+		ui->m_pImage->setPixmap(QPixmap::fromImage(pImage));
+	}
+
+}
+

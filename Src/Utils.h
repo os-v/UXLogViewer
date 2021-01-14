@@ -17,6 +17,8 @@
 	#include <strings.h>
 #endif
 
+#define LOG_TRIGGERTIME		1 * 1000
+
 #define ARRAY_SIZE(p)		(sizeof(p) / sizeof(p[0]))
 
 #define CArray			QVector
@@ -27,10 +29,14 @@
 class QFont;
 class QWidget;
 
-#define StrFormat		QString::asprintf
+#define StrFormat			QString::asprintf
 
 void SleepMS(unsigned long nValue);
 
+bool LogIsEnabled();
+void LogEnable(bool fEnable);
+QString &LogMessages();
+void LogMessage(const char *lpFmt, ...);
 void ScaleSet(float fValue);
 float ScaleGet();
 float ScaleUI(int nValue);

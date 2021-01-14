@@ -246,7 +246,7 @@ void CLogWidget::SelectItem(qint64 nROffset, qint64 nVOffset)
 	ui->m_pTreeView->selectionModel()->setCurrentIndex(pIndex, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Rows | QItemSelectionModel::Select);
 
 	m_nSelected = nROffset;
-	//qDebug("SelectItem(%d)", (int)m_nSelected);
+	LogMessage("SelectItem(%d)", (int)m_nSelected);
 
 	if(m_pFiltered)
 		OnItemDoubleClicked(pIndex);
@@ -345,7 +345,7 @@ void CLogWidget::resizeEvent(QResizeEvent *event)
 void CLogWidget::OnVScrollValuechanged(int nValue)
 {
 
-	//qDebug("OnVScrollValuechanged(%d, %d)", nValue, m_nAction);
+	LogMessage("OnVScrollValuechanged(%d, %d)", nValue, m_nAction);
 
 	QScrollBar *pScroll = ui->m_pTreeView->verticalScrollBar();
 
@@ -366,7 +366,7 @@ void CLogWidget::OnVScrollValuechanged(int nValue)
 		}
 	}
 
-	//qDebug("OnVScrollValuechanged() -> off:%d, record:%d", nOffset, pLogFile->GetRecord());
+	LogMessage("OnVScrollValuechanged() -> off:%d, record:%d", nOffset, pLogFile->GetRecord());
 	if(m_nAction == QAbstractSlider::SliderPageStepAdd || m_nAction == QAbstractSlider::SliderPageStepSub)
 		nOffset = pLogFile->MoveOn(m_nAction == QAbstractSlider::SliderPageStepAdd ? pScroll->pageStep() : -pScroll->pageStep());
 	else if(m_nAction == QAbstractSlider_SliderMoved/* || m_nAction == QAbstractSlider::SliderNoAction*/)
@@ -376,17 +376,17 @@ void CLogWidget::OnVScrollValuechanged(int nValue)
 	//else if(m_nAction == QAbstractSlider::SliderToMinimum)
 	//else if(m_nAction == QAbstractSlider::SliderToMaximum)
 
-	//qDebug("OnVScrollValuechanged() -> off:%d, record:%d, readed:%d", nOffset, pLogFile->GetRecord(), pLogFile->GetReaded());
+	LogMessage("OnVScrollValuechanged() -> off:%d, record:%d, readed:%d", nOffset, pLogFile->GetRecord(), pLogFile->GetReaded());
 
 	pScroll->setValue(nOffset);
 
 	int nSelected = pLogFile->FindRecord(m_nSelected);
 	quint64 nPrevSelected = m_nSelected;
-	//qDebug("OnVScrollValuechanged() -> sel:%d, msel:%d", nSelected, (int)m_nSelected);
+	LogMessage("OnVScrollValuechanged() -> sel:%d, msel:%d", nSelected, (int)m_nSelected);
 	QModelIndex pIndex = m_pLogModel->index(nSelected != -1 ? nSelected : -1, 0);
 	ui->m_pTreeView->selectionModel()->setCurrentIndex(pIndex, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Rows | QItemSelectionModel::Select);
 	m_nSelected = nPrevSelected;
-	//qDebug("OnVScrollValuechanged() -> %d", (int)nPrevSelected);
+	LogMessage("OnVScrollValuechanged() -> %d", (int)nPrevSelected);
 
 	//if(m_nAction != QAbstractSlider_SliderMoved)// && m_nAction != QAbstractSlider::SliderPageStepAdd && m_nAction != QAbstractSlider::SliderPageStepSub)
 		m_nAction = QAbstractSlider::SliderNoAction;
@@ -398,7 +398,7 @@ void CLogWidget::OnVScrollValuechanged(int nValue)
 void CLogWidget::OnVScrollSliderMoved(int nValue)
 {
 
-	//qDebug("OnVScrollSliderMoved(%d)", nValue);
+	LogMessage("OnVScrollSliderMoved(%d)", nValue);
 
 	m_nAction = QAbstractSlider_SliderMoved;
 
@@ -409,7 +409,7 @@ void CLogWidget::OnVScrollSliderMoved(int nValue)
 void CLogWidget::OnVScrollActionTriggered(int nAction)
 {
 
-	//qDebug("OnVScrollActionTriggered(%d, %d)", nAction, m_nAction);
+	LogMessage("OnVScrollActionTriggered(%d, %d)", nAction, m_nAction);
 
 	if(m_nAction != QAbstractSlider_SliderMoved && m_nAction != QAbstractSlider::SliderPageStepAdd && m_nAction != QAbstractSlider::SliderPageStepSub)
 		m_nAction = nAction;
@@ -503,7 +503,7 @@ void CLogWidget::OnItemClicked(const QModelIndex &index)
 
 	m_nSelected = nSelected;
 
-	//qDebug("OnItemClicked(row:%d, record:%d, readed:%d, sel:%d)", nCurrentRow, pLogFile->GetRecord(), pLogFile->GetReaded(), (int)m_nSelected);
+	LogMessage("OnItemClicked(row:%d, record:%d, readed:%d, sel:%d)", nCurrentRow, pLogFile->GetRecord(), pLogFile->GetReaded(), (int)m_nSelected);
 
 }
 
@@ -533,7 +533,7 @@ void CLogWidget::OnItemDoubleClicked(const QModelIndex &index)
 void CLogWidget::OnNavigate(int eType)
 {
 
-	//qDebug("OnNavigate: %d", eType);
+	LogMessage("OnNavigate: %d", eType);
 
 	ILogFile *pLogFile = GetLogFile();
 
@@ -545,7 +545,7 @@ void CLogWidget::OnNavigate(int eType)
 	int nCurrent = pCurrent.row() - pLogFile->GetRecord();
 	int nLastPage = pLogFile->GetSize() - pScroll->pageStep();
 
-	//qDebug("\trow:%d, crow:%d, record:%d, readed:%d, last:%d", pCurrent.row(), nCurrent, pLogFile->GetRecord(), pLogFile->GetReaded(), nLastPage);
+	LogMessage("\trow:%d, crow:%d, record:%d, readed:%d, last:%d", pCurrent.row(), nCurrent, pLogFile->GetRecord(), pLogFile->GetReaded(), nLastPage);
 	
 	if(eType == CListView::ENavTypeLineDown)
 		nCurrent = nCurrent >= pLogFile->GetReaded() - 2 ? (nOffset = pLogFile->MoveOn(1)) + nCurrent : pCurrent.row() + 1;
@@ -560,7 +560,7 @@ void CLogWidget::OnNavigate(int eType)
 	else if(eType == CListView::ENavTypeHome)
 		nCurrent = (nOffset = pLogFile->MoveAt(0)) + nCurrent;
 
-	//qDebug("\toff:%d, crow:%d, record:%d, readed:%d", nOffset, nCurrent, pLogFile->GetRecord(), pLogFile->GetReaded());
+	LogMessage("\toff:%d, crow:%d, record:%d, readed:%d", nOffset, nCurrent, pLogFile->GetRecord(), pLogFile->GetReaded());
 
 	if(nOffset != pScroll->value())
 		pScroll->setValue(nOffset);
@@ -570,7 +570,7 @@ void CLogWidget::OnNavigate(int eType)
 		return;
 
 	m_nSelected = nSelected;
-	//qDebug("\tselected:%d", m_nSelected);
+	LogMessage("\tselected:%d", m_nSelected);
 
 	QModelIndex pIndex = m_pLogModel->index(nCurrent, 0);
 	ui->m_pTreeView->selectionModel()->setCurrentIndex(pIndex, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Rows | QItemSelectionModel::Select);
