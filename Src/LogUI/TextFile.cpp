@@ -9,6 +9,7 @@
 
 #include "TextFile.h"
 #include <QFile>
+#include <QFileInfo>
 #include <QTextStream>
 #include "../Utils.h"
 
@@ -16,6 +17,8 @@ CTextFile::CTextFile()
 {
 
 	m_pFile = 0;
+
+	m_nFileSize = 0;
 
 	m_nBufferSize = 0;
 	m_nBufferOffset = 0;
@@ -38,6 +41,8 @@ void CTextFile::Attach(QFile *pFile, int nFrame)
 
 	m_pFile = pFile;
 
+	m_nFileSize = QFileInfo(pFile->fileName()).size();
+
 	m_pBuffer.resize(nFrame);
 
 	m_nBufferPtr = 0;
@@ -49,6 +54,8 @@ void CTextFile::Detach()
 {
 
 	m_pFile = 0;
+
+	m_nFileSize = 0;
 
 	m_nBufferSize = 0;
 	m_nBufferOffset = 0;
@@ -62,18 +69,25 @@ void CTextFile::Detach()
 bool CTextFile::Create(QString sPath, int nFrame)
 {
 
+	LogMessage("CTextFile::Create(%ls)", sPath.utf16());
+
 	m_pFile = new QFile();
 	m_pFile->setFileName(sPath);
 	if(!m_pFile->open(QIODevice::ReadOnly))
 	{
+		LogMessage("CTextFile::Create() -> failed");
 		SafeDelete(m_pFile);
 		return false;
 	}
+
+	m_nFileSize = QFileInfo(sPath).size();
 
 	m_pBuffer.resize(nFrame);
 
 	m_nBufferPtr = 0;
 	m_nBufferSize = 0;
+
+	LogMessage("CTextFile::Create() -> %ld", m_nFileSize);
 
 	return true;
 }
@@ -81,7 +95,16 @@ bool CTextFile::Create(QString sPath, int nFrame)
 void CTextFile::Destroy()
 {
 
-	SafeDelete(m_pFile);	
+	SafeDelete(m_pFile);
+
+	m_nFileSize = 0;
+
+	m_nBufferSize = 0;
+	m_nBufferOffset = 0;
+	m_nBufferPtr = 0;
+
+	m_nLineOffset = 0;
+	m_sLineText = "";
 
 }
 

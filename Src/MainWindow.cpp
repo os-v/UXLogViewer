@@ -229,6 +229,9 @@ void CMainWindow::OnFileOpen()
 {
 
 	QString sFileName = PromptFilePath(false);
+
+	LogMessage("CMainWindow::OnFileOpen() -> %ls", sFileName.utf16());
+
 	if(sFileName.isEmpty())
 		return;
 

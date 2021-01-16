@@ -48,6 +48,10 @@ public:
 		return m_pFile != 0;
 	}
 
+	qint64 GetSize() {
+		return m_nFileSize;
+	}
+
 	qint64 GetOffset() {
 		return m_nBufferOffset + m_nBufferPtr;
 	}
@@ -57,7 +61,7 @@ public:
 	}
 
 	bool IsEOF() {
-		return m_pFile->atEnd() && m_nBufferPtr >= m_nBufferSize;
+		return m_pFile->pos() == m_nFileSize && m_nBufferPtr >= m_nBufferSize;
 	}
 
 	qint64 GetLineOffset() {
@@ -75,6 +79,8 @@ public:
 protected:
 
 	QFile *m_pFile;
+
+	qint64 m_nFileSize;
 
 	int m_nBufferSize;
 	qint64 m_nBufferOffset;

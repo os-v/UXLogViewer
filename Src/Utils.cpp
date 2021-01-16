@@ -47,10 +47,9 @@ void LogMessage(const char *lpFmt, ...)
 		return;
 	va_list args;
 	va_start(args, lpFmt);
-	QString sMessage;
-	sMessage.vsprintf(lpFmt, args);
+	QString sMessage = QString::vasprintf(lpFmt, args);
 	va_end(args);
-	QString sTime = StrFormat("%d", QDateTime::currentMSecsSinceEpoch() - QDateTime(QDate::currentDate()).toMSecsSinceEpoch());
+	QString sTime = StrFormat("%d", (int)(QDateTime::currentMSecsSinceEpoch() - QDateTime(QDate::currentDate().startOfDay()).toMSecsSinceEpoch()));
 	GLogMessages += sTime + ": " + sMessage + "\n";
 	qDebug() << sMessage;
 }

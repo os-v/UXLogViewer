@@ -176,6 +176,8 @@ void CLogWidget::ThemeUpdated(QByteArray pState)
 void CLogWidget::LoadFile(QString sFileName)
 {
 
+	LogMessage("CLogWidget::LoadFile()");
+
 	m_pLogFileFlt->Reset();
 
 	m_pLogModel->UpdateView(0, DEFAULT_ROWSCOUNT);

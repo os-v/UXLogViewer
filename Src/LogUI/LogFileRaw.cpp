@@ -49,6 +49,8 @@ CLogFileRaw::~CLogFileRaw()
 bool CLogFileRaw::Create(QString sPath, int nFrame, CLogTheme *pLogTheme)
 {
 
+	LogMessage("CLogFileRaw::Create()");
+
 	m_pFile.Create(sPath, 1024);
 	if(!m_pFile.IsOpened())
 	{
@@ -345,6 +347,7 @@ int CLogFileRaw::MoveOn(int nRecords)
 
 	if(nRecords > 0 && m_pFile.IsEOF())
 	{
+		LogMessage("CLogFileRaw::MoveOn() -> EOF");
 		m_nFOffset = m_nFSize;
 		MoveOn(-m_nFrame + 1);
 		m_nRecord = m_nSSize - m_nFrame;
@@ -354,6 +357,7 @@ int CLogFileRaw::MoveOn(int nRecords)
 	bool fLastPage = m_nFOffset == m_nFSize;
 	m_pFile.SetOffset(m_nFOffset);
 
+	LogMessage("CLogFileRaw::MoveOn() -> skip: %d", nRecords);
 	for(int iSkip = 0; iSkip < nRecords && !m_pFile.IsEOF(); iSkip++)
 		m_pFile.ReadNextLine();
 
@@ -372,10 +376,13 @@ int CLogFileRaw::MoveOn(int nRecords)
 
 	m_nRecord = (int)nOffset;
 
+	LogMessage("CLogFileRaw::MoveOn() -> offset: %ld, fsize: %ld, ssize: %d, frame: %d, readed: %d", m_nFOffset, m_nFSize, m_nSSize, m_nFrame, m_nReaded);
+
 	ReadFrame();
 
 	if(m_nReaded < m_nFrame && !fLastPage)
 	{
+		LogMessage("CLogFileRaw::MoveOn() -> readed: %d, frame: %d", m_nReaded, m_nFrame);
 		m_nFOffset = m_nFSize;
 		MoveOn(-m_nFrame + 1);
 		m_nRecord = m_nSSize - m_nFrame;
@@ -413,12 +420,13 @@ void CLogFileRaw::DoLoad()
 
 	emit ProgressUpdate(0);
 
-	QFile *pFile = m_pFile.GetFileObject();
-	m_nFSize = pFile->size();
+	m_nFSize = m_pFile.GetSize();
 	if(!m_nFSize)
 		m_nSSize = 0;
 
-	pFile->seek(0);
+	m_pFile.SetOffset(0);
+
+	LogMessage("CLogFileRaw::DoLoad() > size: %ld", m_nFSize);
 
 	emit ProgressUpdate(100);
 
