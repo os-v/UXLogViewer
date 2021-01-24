@@ -13,7 +13,6 @@
 	</ul>
 </p>
 
-
 ## Current Features
 - Cross platform (Windows, macOS, Linux, FreeBSD, iOS, Android)
 - Large files support ( > 4GB) without RAM dependence
@@ -28,6 +27,16 @@
 
 ## Known issues
 - Recent files may not work on Android
+
+## Online account
+* For theme's configuration roaming between devices online account should be used:
+	* Register: https://lv.os-v.pw/Register.php
+	* Login: https://lv.os-v.pw/Login.php
+* Account can be public to allow downsync without password, or private to require password for downsync. To change account type to private or public login into your account and click 'Make Private' or 'Make Public'.
+
+## Build Process
+* Use QT to build:
+	* https://www.qt.io/download
 
 ## Filtering expressions
 * Regular expression or boolean expression should be used to filter log file. If filtering expression doesn't correspond to the common format described below, then entered expression is treated as a regular expression filter.
@@ -74,9 +83,6 @@
 			!(Date>="2017.10.23"&&Date<="2017.10.24")
 		```
 
-## License
-This software is distributed under the [GPL 3.0](https://github.com/os-v/UXLogViewer/blob/master/LICENSE) license. Please read LICENSE for information on the software availability and distribution.
-
 ## Screenshots
 <p align="center">
 	<img alt="Android" src="https://user-images.githubusercontent.com/73893487/104474505-a98c7a80-55f0-11eb-938e-dcd7bc1b933f.png" width="360" height="640"/>
@@ -87,4 +93,6 @@ This software is distributed under the [GPL 3.0](https://github.com/os-v/UXLogVi
 	<img alt="FreeBSD" src="https://user-images.githubusercontent.com/73893487/104474511-abeed480-55f0-11eb-887f-eb572b7eca9e.png"/>
 </p>
 
+## License
+This software is distributed under the [GPL 3.0](https://github.com/os-v/UXLogViewer/blob/master/LICENSE) license. Please read LICENSE for information on the software availability and distribution.
 
