@@ -22,12 +22,14 @@ CAboutDialog::CAboutDialog(QWidget *parent) :
 
 	ui->setupUi(this);
 
-	//setWindowFlags(windowFlags() | Qt::MSWindowsFixedSizeDialogHint);
+	setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint | Qt::MSWindowsFixedSizeDialogHint);
 
-	QString sMessage = StrFormat("<html><body>UXLogViewer v%s<br><br>%s<br><br><a href='%s'>%s</a></body></html>", PRODUCT_SVERSION, PRODUCT_LEGALCOPYRIGHT, PRODUCT_COMPANYNAME, PRODUCT_COMPANYNAME);
+	QString sMessage = StrFormat("<html><body>" PRODUCT_PRODUCTNAME " v%s<br><br>%s<br><br><a href='%s'>%s</a></body></html>", PRODUCT_SVERSION, PRODUCT_LEGALCOPYRIGHT, PRODUCT_COMPANYNAME, PRODUCT_COMPANYNAME);
 	ui->m_pLabelText->setText(sMessage);
 
 	FontSet(this, true);
+
+	setFixedSize(size());
 
 	//if(CAppConfig::Instance().IsMobile)
 		//layout()->removeItem(ui->m_pVerticalSpacerDesktop);

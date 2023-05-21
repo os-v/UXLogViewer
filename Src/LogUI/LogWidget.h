@@ -12,6 +12,7 @@
 
 #include <QWidget>
 #include <QItemSelection>
+#include <QFileSystemWatcher>
 
 #include "LogFile.h"
 #include "LogFileRaw.h"
@@ -42,15 +43,17 @@ public:
 		return m_pLogModel;
 	}
 
-	void UpdateFont();
+	void Invalidate();
 
 	QByteArray SaveState();
 	bool RestoreState(QByteArray pState);
 	void ResizeColumnsToContents();
 	void ResizeColumn(int iSection, int nSize);
+	int GetLastColumnWidth();
+	void SetLastColumnWidth(int nWidth);
 
 	void ResetData();
-	void ThemeUpdated(QByteArray pState);
+	void ThemeUpdated(QByteArray pState, int nLastColumnWidth);
 	void LoadFile(QString sFileName);
 	void SaveFile(QString sFileName);
 	bool ApplyFilter(QString sFilter);
@@ -70,12 +73,16 @@ private:
 
 	Ui::CLogWidget *ui;
 
+	QFileSystemWatcher m_pFileWatcher;
+
 	CLogModel *m_pLogModel;
 	CLogWidget *m_pFiltered;
 	CLogFileRaw *m_pLogFileRaw;
 	CLogFileFlt *m_pLogFileFlt;
 
 	qint64 m_nSelected;
+
+	void UpdateSelected(qint64 nSelect, int nSelected);
 
 	virtual void resizeEvent(QResizeEvent *event);
 
@@ -87,6 +94,8 @@ signals:
 	void OnItemContextMenu(QPoint pt);
 
 private slots:
+
+	void OnFileChanged(const QString& sPath);
 
 	void OnVScrollValuechanged(int nValue);
 	void OnVScrollSliderMoved(int nValue);

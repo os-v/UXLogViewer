@@ -21,6 +21,8 @@ CThemeDialog::CThemeDialog(QWidget *parent) :
 
 	ui->setupUi(this);
 
+	setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint | Qt::WindowMaximizeButtonHint);
+
 	connect(ui->m_pComboTheme, SIGNAL(currentIndexChanged(int)), this, SLOT(OnThemeChanged(int)));
 	connect(ui->m_pButtonAdd, SIGNAL(clicked()), this, SLOT(OnButtonAdd()));
 	connect(ui->m_pButtonDel, SIGNAL(clicked()), this, SLOT(OnButtonDel()));

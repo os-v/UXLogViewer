@@ -21,6 +21,8 @@ CMessageDialog::CMessageDialog(QString sMessage, QWidget *parent) :
 
 	ui->setupUi(this);
 
+	setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint | Qt::WindowMaximizeButtonHint);
+
 	if(LogIsEnabled())
 	{
 		ui->m_pEditMessage->setPlainText(LogMessages());

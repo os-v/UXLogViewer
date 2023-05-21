@@ -29,7 +29,7 @@ public:
 	CLogFileRaw();
 	~CLogFileRaw();
 
-	bool Create(QString sPath, int nFrame, CLogTheme *pLogTheme);
+	bool Create(QString sPath, int nFrame, int nLineLimit, CLogTheme *pLogTheme);
 	void Destroy();
 
 	void UpdateTheme(CLogTheme *pTheme);
@@ -55,6 +55,7 @@ public:
 	int MoveTo(int nOffset);
 	int MoveOn(int nRecords);
 	void ReadFrame();
+	void OnUpdated();
 
 	bool IsEOF() {
 		return m_nFOffset == m_nFSize;
@@ -77,6 +78,11 @@ public:
 		return m_nFrame;
 	}
 
+	void SetLineLimit(int nLine);
+	int GetLineLimit() {
+		return m_nLineLimit;
+	}
+
 	QString *GetFrameLine(int iLine) {
 		return iLine < m_nRecord || iLine - m_nRecord >= m_nReaded ? 0 : m_pFrame[iLine - m_nRecord];
 	}
@@ -95,6 +101,7 @@ protected:
 	CLogTheme *m_pTheme;
 
 	int m_nFrame;
+	int m_nLineLimit;
 	int m_nSSize;
 	qint64 m_nFSize;
 	qint64 m_nFOffset;

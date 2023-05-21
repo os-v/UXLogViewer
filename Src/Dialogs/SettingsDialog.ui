@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>196</height>
+    <width>359</width>
+    <height>302</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,24 +18,104 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QCheckBox" name="m_pCheckFileOpenUI">
-     <property name="text">
-      <string>Custom file open UI</string>
+    <layout class="QHBoxLayout" name="m_pLayoutFileUI">
+     <item>
+      <widget class="QCheckBox" name="m_pCheckFileSaveUI">
+       <property name="text">
+        <string>Custom file save UI</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="m_pCheckFileOpenUI">
+       <property name="text">
+        <string>Custom file open UI</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="m_pLayoutFileOpts">
+     <item>
+      <widget class="QCheckBox" name="m_pCheckReopenLast">
+       <property name="text">
+        <string>Reopen last file</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="m_pCheckMonitorFile">
+       <property name="text">
+        <string>Monitor file changes</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="m_pLayoutLastColumn">
+     <item>
+      <widget class="QLabel" name="m_pLabelColumnWidth">
+       <property name="text">
+        <string>Last column width</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="m_pEditColumnWidth">
+       <property name="maximum">
+        <number>1000000</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="m_pLayoutLineLimit">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetDefaultConstraint</enum>
      </property>
-    </widget>
+     <item>
+      <widget class="QLabel" name="m_pLabelLineLimit">
+       <property name="text">
+        <string>Limit line to symbols</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="m_pEditLineLimit">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maximum">
+        <number>1000000</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
-    <widget class="QCheckBox" name="m_pCheckFileSaveUI">
-     <property name="text">
-      <string>Custom file save UI</string>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="m_pLayoutFontSize">
+     <item>
+      <widget class="QComboBox" name="m_pFontUI"/>
+     </item>
+     <item>
+      <widget class="QComboBox" name="m_pFontLog"/>
+     </item>
+    </layout>
    </item>
    <item>
-    <widget class="QComboBox" name="m_pFontUI"/>
-   </item>
-   <item>
-    <widget class="QComboBox" name="m_pFontLog"/>
+    <widget class="QComboBox" name="m_pComboFilterType"/>
    </item>
    <item>
     <widget class="QWidget" name="m_pWidgetSpacingDesktop" native="true">

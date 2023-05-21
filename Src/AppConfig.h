@@ -41,14 +41,20 @@ public:
 	QString RecentFolder;
 	QString ServiceUser;
 	QString ServiceURL;
+	QString LastFilePath;
 
 	bool DockFloat;
 
+	bool FileReopen;
 	bool FileOpenUI;
 	bool FileSaveUI;
+	bool FileMonitor;
+	int FilterType;
 
 	int FontSizeMain;
 	int FontSizeFixed;
+	int ColumnWidth;
+	int MaxLineLength;
 
 	QByteArray MainState;
 	QByteArray MainGeometry;

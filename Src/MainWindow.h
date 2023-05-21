@@ -53,6 +53,7 @@ private:
 	CLogWidget *FindFocusedLogWidget();
 
 	QString PromptFilePath(bool fSave);
+	void OpenFile(const QString& sFileName);
 
 private slots:
 

@@ -19,14 +19,16 @@ public:
 	CTextFile();
 	~CTextFile();
 
-	void Attach(QFile *pFile, int nFrame = 1024 * 1024);
+	void Attach(QFile *pFile, int nFrame = 64 * 1024);
 	void Detach();
 
-	bool Create(QString sPath, int nFrame = 1024 * 1024);
+	bool Create(QString sPath, int nFrame = 64 * 1024);
 	void Destroy();
 
-	bool ReadNextLine(bool fSkipCR = true);
-	bool ReadPrevLine(bool fSkipCR = true);
+	void Update();
+
+	bool ReadNextLine(bool fSkipCR = true, int nLineLimit = 0);
+	bool ReadPrevLine(bool fSkipCR = true, int nLineLimit = 0);
 
 	qint64 GetFrameOffset() {
 		return m_nBufferOffset;

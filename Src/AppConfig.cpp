@@ -19,13 +19,19 @@
 #define KEY_RECENTFOLDER		"RecentFolder"
 #define KEY_SERVICEUSER			"ServiceUser"
 #define KEY_SERVICEURL			"ServiceURL"
+#define KEY_LASTFILEPATH		"LastFilePath"
 
 #define KEY_DOCKFLOAT			"DockFloat"
+#define KEY_FILEREOPEN			"FileReopen"
 #define KEY_FILEOPENUI			"FileOpenUI"
 #define KEY_FILESAVEUI			"FileSaveUI"
+#define KEY_FILEMONITOR			"FileMonitor"
+#define KEY_FILTERTYPE			"FilterType"
 
 #define KEY_FONTSIZEMAIN		"FontSizeMain"
 #define KEY_FONTSIZEFIXED		"FontSizeFixed"
+#define KEY_COLUMNWIDTH			"ColumnWidth"
+#define KEY_MAXLINELENGTH		"MaxLineLength"
 
 #define KEY_MAINSTATE			"MainState"
 #define KEY_MAINGEOMETRY		"MainGeometry"
@@ -41,6 +47,8 @@
 #define KEY_THEMEDEFS			"ThemeDefs"
 #define KEY_THEMEHEADERS		"ThemeHeaders"
 
+#define VAL_SERVERURL			"https://os-v.pw/lv/Sync.php"
+
 #if defined(Q_OS_ANDROID) || defined(Q_OS_IOS)
 	bool CAppConfig::IsMobile = true;
 #else
@@ -54,12 +62,16 @@ CAppConfig::CAppConfig()
 
 	RecentFolder = "";
 	ServiceUser = "";
-	ServiceURL = "https://lv.os-v.pw/Sync.php";
+	ServiceURL = VAL_SERVERURL;
+	LastFilePath = "";
 
 	DockFloat = false;
 
+	FileReopen = false;
 	FileOpenUI = false;
 	FileSaveUI = false;
+	FileMonitor = false;
+	FilterType = 0;
 
 #ifdef _WIN32
 	FontSizeMain = 8;
@@ -68,6 +80,9 @@ CAppConfig::CAppConfig()
 	FontSizeMain = 14;
 	FontSizeFixed = 14;
 #endif
+
+	ColumnWidth = 0;
+	MaxLineLength = 0;
 
 	for(int iFilter = 0; iFilter < FILTER_COUNT; iFilter++)
 		FilterState[iFilter] = iFilter == FILTER_MAIN_A;
@@ -104,14 +119,20 @@ void CAppConfig::Load(QString sPath)
 	RecentFolder = m_pSettings->value(KEY_RECENTFOLDER).toString();
 	ServiceUser = m_pSettings->value(KEY_SERVICEUSER, ServiceUser).toString();
 	ServiceURL = m_pSettings->value(KEY_SERVICEURL, ServiceURL).toString();
+	LastFilePath = m_pSettings->value(KEY_LASTFILEPATH, LastFilePath).toString();
 
 	DockFloat = m_pSettings->value(KEY_FILEOPENUI, DockFloat).toBool();
 
+	FileReopen = m_pSettings->value(KEY_FILEREOPEN, FileReopen).toBool();
 	FileOpenUI = m_pSettings->value(KEY_FILEOPENUI, FileOpenUI).toBool();
 	FileSaveUI = m_pSettings->value(KEY_FILESAVEUI, FileSaveUI).toBool();
+	FileMonitor = m_pSettings->value(KEY_FILEMONITOR, FileMonitor).toBool();
+	FilterType = m_pSettings->value(KEY_FILTERTYPE, FilterType).toInt();
 
 	FontSizeMain = m_pSettings->value(KEY_FONTSIZEMAIN, FontSizeMain).toInt();
 	FontSizeFixed = m_pSettings->value(KEY_FONTSIZEFIXED, FontSizeFixed).toInt();
+	ColumnWidth = m_pSettings->value(KEY_COLUMNWIDTH, ColumnWidth).toInt();
+	MaxLineLength = m_pSettings->value(KEY_MAXLINELENGTH, MaxLineLength).toInt();
 
 	MainState = m_pSettings->value(KEY_MAINSTATE).toByteArray();
 	MainGeometry = m_pSettings->value(KEY_MAINGEOMETRY).toByteArray();
@@ -143,12 +164,18 @@ void CAppConfig::Save()
 	m_pSettings->setValue(KEY_RECENTFOLDER, RecentFolder);
 	m_pSettings->setValue(KEY_SERVICEUSER, ServiceUser);
 	m_pSettings->setValue(KEY_SERVICEURL, ServiceURL);
+	m_pSettings->setValue(KEY_LASTFILEPATH, LastFilePath);
 
+	m_pSettings->setValue(KEY_FILEREOPEN, FileReopen);
 	m_pSettings->setValue(KEY_FILEOPENUI, FileOpenUI);
 	m_pSettings->setValue(KEY_FILESAVEUI, FileSaveUI);
+	m_pSettings->setValue(KEY_FILEMONITOR, FileMonitor);
+	m_pSettings->setValue(KEY_FILTERTYPE, FilterType);
 
 	m_pSettings->setValue(KEY_FONTSIZEMAIN, FontSizeMain);
 	m_pSettings->setValue(KEY_FONTSIZEFIXED, FontSizeFixed);
+	m_pSettings->setValue(KEY_COLUMNWIDTH, ColumnWidth);
+	m_pSettings->setValue(KEY_MAXLINELENGTH, MaxLineLength);
 
 	m_pSettings->setValue(KEY_MAINSTATE, MainState);
 	m_pSettings->setValue(KEY_MAINGEOMETRY, MainGeometry);

@@ -32,10 +32,14 @@ CSyncDialog::CSyncDialog(QWidget *parent) :
 
 	ui->setupUi(this);
 
+	setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint);
+
 	m_fResponse = false;
 	m_fUpdated = false;
 
 	FontSet(this, true);
+
+	setFixedSize(size());
 
 	ui->m_pEditUsername->setText(CAppConfig::Instance().ServiceUser);
 
@@ -136,6 +140,7 @@ bool CSyncDialog::SendRequest(QString sURL, QJsonDocument &pRequestData, QJsonDo
 {
 
 	QProgressDialog pProgress(this);
+	pProgress.setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint);
 	pProgress.setModal(true);
 	pProgress.setWindowTitle("Sync");
 	pProgress.setLabelText("Requesting server ...");
@@ -152,6 +157,8 @@ bool CSyncDialog::SendRequest(QString sURL, QJsonDocument &pRequestData, QJsonDo
 
 	QNetworkAccessManager pAccessManager(this);
 	QNetworkReply *pReply = pAccessManager.post(pRequest, pRequestData.toJson());
+
+	pReply->ignoreSslErrors();
 
 	QObject::connect(&pAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(OnRequestFinished(QNetworkReply*)));
 

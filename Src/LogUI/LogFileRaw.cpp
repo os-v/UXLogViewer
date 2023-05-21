@@ -22,6 +22,7 @@ CLogFileRaw::CLogFileRaw()
 	m_pTheme = &CLogTheme::Instance();
 
 	m_nFrame = 0;
+	m_nLineLimit = 0;
 	m_nSSize = 0;
 	m_nFSize = 0;
 	m_nFOffset = 0;
@@ -46,12 +47,12 @@ CLogFileRaw::~CLogFileRaw()
 
 }
 
-bool CLogFileRaw::Create(QString sPath, int nFrame, CLogTheme *pLogTheme)
+bool CLogFileRaw::Create(QString sPath, int nFrame, int nLineLimit, CLogTheme *pLogTheme)
 {
 
 	LogMessage("CLogFileRaw::Create()");
 
-	m_pFile.Create(sPath, 1024);
+	m_pFile.Create(sPath);
 	if(!m_pFile.IsOpened())
 	{
 		Reset();
@@ -60,6 +61,7 @@ bool CLogFileRaw::Create(QString sPath, int nFrame, CLogTheme *pLogTheme)
 
 	m_sFile = sPath;
 	m_nFrame = nFrame;
+	m_nLineLimit = nLineLimit;
 	m_nSSize = DEFAULT_ROWSCOUNT;
 	m_nFSize = 0;
 	m_nFOffset = -1;
@@ -70,7 +72,8 @@ bool CLogFileRaw::Create(QString sPath, int nFrame, CLogTheme *pLogTheme)
 
 	SetFrameSize(nFrame);
 
-	ProcessData(false);
+	OnUpdated();
+	//ProcessData(false);
 
 	return true;
 }
@@ -169,7 +172,7 @@ void CLogFileRaw::EnumRecords(FOnEnumRecordsCallback OnEnumRecordsCallback, void
 	pStream.Attach(pFile);
 	for(; !pStream.IsEOF(); )
 	{
-		pStream.ReadNextLine();
+		pStream.ReadNextLine(true, m_nLineLimit);
 		QString sLine = pStream.GetLineText();
 		qint64 nOffset = pStream.GetLineOffset();
 		int nProgress = (int)(nOffset * 100 / nFSize);
@@ -202,7 +205,7 @@ int CLogFileRaw::PollRecords(qint64 *pOffset, QString **pFrame, CLogTheme *pThem
 	for(nReaded = 0; nReaded < nCount && !pStream.IsEOF(); nReaded++)
 	{
 		pStream.SetOffset(pOffset[nReaded]);
-		pStream.ReadNextLine();
+		pStream.ReadNextLine(true, m_nLineLimit);
 		QString sMessage = pStream.GetLineText();
 		if(pTheme)
 		{
@@ -241,6 +244,13 @@ void CLogFileRaw::SetFrameSize(int nFrame)
 	m_pOffset = new qint64[nFrame + 1];
 	for(int iRecord = 0; iRecord < nFrame + 1; iRecord++)
 		m_pOffset[iRecord] = -1;
+
+}
+
+void CLogFileRaw::SetLineLimit(int nLine)
+{
+
+	m_nLineLimit = nLine;
 
 }
 
@@ -323,7 +333,7 @@ int CLogFileRaw::MoveTo(int nOffset)
 	}
 
 	if(nFOffset)
-		m_pFile.ReadNextLine();
+		m_pFile.ReadNextLine(true, m_nLineLimit);
 
 	m_nFOffset = m_pFile.GetOffset();
 
@@ -359,10 +369,10 @@ int CLogFileRaw::MoveOn(int nRecords)
 
 	LogMessage("CLogFileRaw::MoveOn() -> skip: %d", nRecords);
 	for(int iSkip = 0; iSkip < nRecords && !m_pFile.IsEOF(); iSkip++)
-		m_pFile.ReadNextLine();
+		m_pFile.ReadNextLine(true, m_nLineLimit);
 
 	for(int iSkip = nRecords - (nRecords < 0 ? 1 : 0); iSkip < 0 && !m_pFile.IsBOF(); iSkip++)
-		m_pFile.ReadPrevLine();
+		m_pFile.ReadPrevLine(true, m_nLineLimit);
 
 	m_nFOffset = m_pFile.GetOffset();
 	if(m_nFOffset && nRecords < 0)
@@ -402,7 +412,7 @@ void CLogFileRaw::ReadFrame()
 	int nColCount = m_pTheme->GetColCount();
 	for(m_nReaded = 0; m_nReaded < m_nFrame + 1 && !m_pFile.IsEOF(); m_nReaded++)
 	{
-		m_pFile.ReadNextLine();
+		m_pFile.ReadNextLine(true, m_nLineLimit);
 		m_pOffset[m_nReaded] = m_pFile.GetLineOffset();
 		QString *pArgs = m_pFrame[m_nReaded];
 		if(!m_pTheme->Parse(m_pFile.GetLineText(), pArgs))
@@ -412,6 +422,19 @@ void CLogFileRaw::ReadFrame()
 			pArgs[nColCount - 1] = m_pFile.GetLineText();
 		}
 	}
+
+}
+
+void CLogFileRaw::OnUpdated()
+{
+
+	m_pFile.Update();
+
+	m_nFSize = m_pFile.GetSize();
+	if(!m_nFSize)
+		m_nSSize = 0;
+	else
+		m_nSSize = DEFAULT_ROWSCOUNT;
 
 }
 

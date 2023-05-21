@@ -49,6 +49,8 @@ CFileDialog::CFileDialog(bool fSave, QString sPath, bool fStaticFolder, QWidget 
 
 	ui->setupUi(this);
 
+	setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint | Qt::WindowMaximizeButtonHint);
+
 	ui->m_pEditName->setVisible(fSave);
 
 	m_fStaticFolder = fStaticFolder;

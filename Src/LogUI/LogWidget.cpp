@@ -47,6 +47,8 @@ CLogWidget::CLogWidget(QWidget *parent, int nID, bool fSearchBar, CLogWidget *pF
 	ui->m_pTreeView->header()->setSectionsClickable(true);
 	//ui->m_pTreeView->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
 
+	connect(&m_pFileWatcher, SIGNAL(fileChanged(const QString&)), this, SLOT(OnFileChanged(const QString&)));
+
 	connect(ui->m_pTreeView->verticalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(OnVScrollValuechanged(int)), Qt::QueuedConnection);
 	connect(ui->m_pTreeView->verticalScrollBar(), SIGNAL(sliderMoved(int)), this, SLOT(OnVScrollSliderMoved(int)), Qt::QueuedConnection);
 	connect(ui->m_pTreeView->verticalScrollBar(), SIGNAL(actionTriggered(int)), this, SLOT(OnVScrollActionTriggered(int)), Qt::QueuedConnection);
@@ -84,10 +86,27 @@ CLogWidget::~CLogWidget()
 
 }
 
-void CLogWidget::UpdateFont()
+void CLogWidget::Invalidate()
 {
 
 	ui->m_pTreeView->setFont(*FontGet(true));
+
+	if (GetLogFile() == m_pLogFileRaw)
+		m_pLogFileRaw->SetLineLimit(CAppConfig::Instance().MaxLineLength);
+
+	GetLogFile()->ReadFrame();
+
+	UpdateSelected(m_nSelected, -1);
+
+}
+
+void CLogWidget::UpdateSelected(qint64 nSelect, int nSelected)
+{
+
+	nSelected = nSelect != -1 ? GetLogFile()->FindRecord(nSelect) : nSelected;
+
+	QModelIndex pIndex = m_pLogModel->index(nSelected, 0);
+	ui->m_pTreeView->selectionModel()->setCurrentIndex(pIndex, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Rows | QItemSelectionModel::Select);
 
 }
 
@@ -123,6 +142,16 @@ void CLogWidget::ResizeColumn(int iSection, int nSize)
 
 }
 
+int CLogWidget::GetLastColumnWidth()
+{
+	return ui->m_pTreeView->columnWidth(ui->m_pTreeView->header()->count() - 1);
+}
+
+void CLogWidget::SetLastColumnWidth(int nWidth)
+{
+	ui->m_pTreeView->setColumnWidth(ui->m_pTreeView->header()->count() - 1, nWidth);
+}
+
 void CLogWidget::ResetData()
 {
 
@@ -136,7 +165,7 @@ void CLogWidget::ResetData()
 	int nFrameSize = ui->m_pTreeView->GetVisibleRowsCount();
 
 	if(m_nViewID == FILTER_RESULT)
-		m_pLogFileFlt->Create(m_pFiltered->GetLogFile(), "", nFrameSize, true);
+		m_pLogFileFlt->Create(m_pFiltered->GetLogFile(), "", nFrameSize, true, CAppConfig::Instance().FilterType);
 	else
 		m_pLogFileFlt->SetFrameSize(nFrameSize);
 
@@ -144,7 +173,7 @@ void CLogWidget::ResetData()
 
 }
 
-void CLogWidget::ThemeUpdated(QByteArray pState)
+void CLogWidget::ThemeUpdated(QByteArray pState, int nLastColumnWidth)
 {
 
 	m_pLogFileRaw->UpdateTheme(&CLogTheme::Instance());
@@ -162,14 +191,9 @@ void CLogWidget::ThemeUpdated(QByteArray pState)
 	else
 		pHeader->resizeSections(QHeaderView::ResizeToContents);
 
-	GetLogFile()->ReadFrame();
+	SetLastColumnWidth(nLastColumnWidth);
 
-	int nSelected = GetLogFile()->FindRecord(m_nSelected);
-	if(nSelected != -1)
-	{
-		QModelIndex pIndex = m_pLogModel->index(nSelected, 0);
-		ui->m_pTreeView->selectionModel()->setCurrentIndex(pIndex, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Rows | QItemSelectionModel::Select);
-	}
+	Invalidate();
 
 }
 
@@ -178,6 +202,9 @@ void CLogWidget::LoadFile(QString sFileName)
 
 	LogMessage("CLogWidget::LoadFile()");
 
+	if(m_pFileWatcher.files().size())
+		m_pFileWatcher.removePaths(m_pFileWatcher.files());
+
 	m_pLogFileFlt->Reset();
 
 	m_pLogModel->UpdateView(0, DEFAULT_ROWSCOUNT);
@@ -185,9 +212,11 @@ void CLogWidget::LoadFile(QString sFileName)
 	//m_pLogModel->UpdateView();
 
 	m_pLogFileRaw->Destroy();
-	m_pLogFileRaw->Create(sFileName, nFrameSize, &CLogTheme::Instance());
+	m_pLogFileRaw->Create(sFileName, nFrameSize, CAppConfig::Instance().MaxLineLength, &CLogTheme::Instance());
 	m_pLogFileRaw->MoveTo(0);
 	m_pLogModel->UpdateView(m_pLogFileRaw);
+
+	m_pFileWatcher.addPath(sFileName);
 
 	QScrollBar *pScroll = ui->m_pTreeView->verticalScrollBar();
 	pScroll->setValue(m_pLogFileRaw->GetRecord());
@@ -213,7 +242,7 @@ bool CLogWidget::ApplyFilter(QString sFilter)
 	m_pLogModel->UpdateView(0, DEFAULT_ROWSCOUNT);
 	int nFrameSize = ui->m_pTreeView->GetVisibleRowsCount();
 
-	if(sFilter == "" || !m_pLogFileFlt->Create(m_pFiltered ? m_pFiltered->GetLogFile() : m_pLogFileRaw, sFilter, nFrameSize, false))
+	if(sFilter == "" || !m_pLogFileFlt->Create(m_pFiltered ? m_pFiltered->GetLogFile() : m_pLogFileRaw, sFilter, nFrameSize, false, CAppConfig::Instance().FilterType))
 	{
 		m_pLogFileFlt->Reset();
 		m_pLogFileRaw->MoveTo(0);
@@ -244,14 +273,13 @@ void CLogWidget::SelectItem(qint64 nROffset, qint64 nVOffset)
 		nRecord = pLogFile->FindRecord(nROffset);
 	}
 
-	QModelIndex pIndex = m_pLogModel->index(nRecord, 0);
-	ui->m_pTreeView->selectionModel()->setCurrentIndex(pIndex, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Rows | QItemSelectionModel::Select);
+	UpdateSelected(-1, nRecord);
 
 	m_nSelected = nROffset;
 	LogMessage("SelectItem(%d)", (int)m_nSelected);
 
 	if(m_pFiltered)
-		OnItemDoubleClicked(pIndex);
+		OnItemDoubleClicked(m_pLogModel->index(nRecord, 0));
 
 	ui->m_pTreeView->Repaint();
 
@@ -341,6 +369,31 @@ void CLogWidget::resizeEvent(QResizeEvent *event)
 		pLogFile->SetFrameSize(nRowsCount);
 		pLogFile->ReadFrame();
 	}
+
+}
+
+void CLogWidget::OnFileChanged(const QString& sPath)
+{
+
+	LogMessage("OnFileChanged(%s)", sPath.toLatin1().data());
+
+	m_pLogModel->UpdateView(0, DEFAULT_ROWSCOUNT);
+	m_pLogFileRaw->OnUpdated();
+	m_pLogFileRaw->MoveAt(m_pLogFileRaw->GetOffset());
+	m_pLogModel->UpdateView(m_pLogFileRaw);
+
+	QScrollBar *pScroll = ui->m_pTreeView->verticalScrollBar();
+	bool fScrollAtBottom = pScroll->value() == pScroll->maximum();
+	pScroll->setValue(m_pLogFileRaw->GetRecord());
+	if(fScrollAtBottom)
+	{
+		if(pScroll->value() == m_pLogFileRaw->GetRecord())
+			ui->m_pTreeView->scrollToBottom();
+		else
+			ui->m_pTreeView->scrollToTop();
+	}
+
+	UpdateSelected(m_nSelected, -1);
 
 }
 
@@ -574,8 +627,7 @@ void CLogWidget::OnNavigate(int eType)
 	m_nSelected = nSelected;
 	LogMessage("\tselected:%d", m_nSelected);
 
-	QModelIndex pIndex = m_pLogModel->index(nCurrent, 0);
-	ui->m_pTreeView->selectionModel()->setCurrentIndex(pIndex, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Rows | QItemSelectionModel::Select);
+	UpdateSelected(-1, nCurrent);
 	ui->m_pTreeView->Repaint();
 
 }

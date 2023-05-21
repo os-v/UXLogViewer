@@ -23,6 +23,7 @@ CLogFilter::CLogFilter()
 	m_pField = 0;
 
 	m_pExpression = 0;
+	m_pRegExp = 0;
 
 	m_pTheme = 0;
 
@@ -37,9 +38,11 @@ CLogFilter::~CLogFilter()
 		m_pExpression = 0;
 	}
 
+	SafeDelete(m_pRegExp);
+
 }
 
-bool CLogFilter::Load(QString sFilter, CLogTheme *pTheme)
+bool CLogFilter::Load(QString sFilter, CLogTheme *pTheme, int eType)
 {
 
 	m_sError = "";
@@ -57,20 +60,21 @@ bool CLogFilter::Load(QString sFilter, CLogTheme *pTheme)
 	QVector<int> pToken;
 	QStringList pIdent;
 
-	m_pRegExp = QRegularExpression();
 	if(m_pExpression)
 	{
 		m_pExpression->Destroy();
 		m_pExpression = 0;
 	}
 
-	if(Parse(sFilter, pToken, pIdent) || !pToken.size())
+	SafeDelete(m_pRegExp);
+
+	if((eType == ETypeCustom || eType == ETypeAuto) && (Parse(sFilter, pToken, pIdent) && pToken.size()))
 		m_pExpression = Build(pToken, pIdent, 0, 0, false);
 
-	if(!m_pExpression)
-		m_pRegExp = QRegularExpression(sFilter, QRegularExpression::CaseInsensitiveOption);
+	if(!m_pExpression && (eType == ETypeRegExp || eType == ETypeAuto))
+		m_pRegExp = new QRegularExpression("\"" + sFilter + "\"", QRegularExpression::CaseInsensitiveOption);
 
-	return m_pExpression || m_pRegExp.isValid();
+	return true;
 }
 
 bool CLogFilter::Check(QString *pRecord)
@@ -82,7 +86,10 @@ bool CLogFilter::Check(QString *pRecord)
 	if(m_pExpression)
 		return m_pExpression->Evaluate();
 
-	return m_pRegExp.match(*m_pField[m_pTheme->GetColCount() - 1]).hasMatch();
+	if(m_pRegExp)
+		return m_pRegExp->match(*m_pField[m_pTheme->GetColCount() - 1]).hasMatch();
+
+	return m_pField[m_pTheme->GetColCount() - 1]->contains(m_sFilter, Qt::CaseInsensitive);
 }
 
 bool CLogFilter::Parse(QString &sFilter, QVector<int> &pToken, QStringList &pIdent)

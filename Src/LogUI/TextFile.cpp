@@ -108,7 +108,14 @@ void CTextFile::Destroy()
 
 }
 
-bool CTextFile::ReadNextLine(bool fSkipCR)
+void CTextFile::Update()
+{
+
+	m_nFileSize = QFileInfo(m_pFile->fileName()).size();
+
+}
+
+bool CTextFile::ReadNextLine(bool fSkipCR, int nLineLimit)
 {
 
 	QByteArray pString;
@@ -133,9 +140,12 @@ bool CTextFile::ReadNextLine(bool fSkipCR)
 		char *pCharPtr = pCharStart;
 		for( ; pCharPtr < pCharEnd && *pCharPtr != '\n'; pCharPtr++);
 
-		m_nBufferPtr =  pCharPtr - m_pBuffer.data();
+		m_nBufferPtr = pCharPtr - m_pBuffer.data();
 
-		pString.append(pCharStart, pCharPtr - pCharStart);
+		if(!nLineLimit || pString.length() + (pCharPtr - pCharStart) <= nLineLimit)
+			pString.append(pCharStart, pCharPtr - pCharStart);
+		else if(pString.length() < nLineLimit)
+			pString.append(pCharStart, nLineLimit - pString.length());
 
 		if(pCharPtr != pCharEnd)
 		{
@@ -150,7 +160,7 @@ bool CTextFile::ReadNextLine(bool fSkipCR)
 	return m_sLineText.size();
 }
 
-bool CTextFile::ReadPrevLine(bool fSkipCR)
+bool CTextFile::ReadPrevLine(bool fSkipCR, int nLineLimit)
 {
 
 	QByteArray pString;
@@ -158,7 +168,7 @@ bool CTextFile::ReadPrevLine(bool fSkipCR)
 	m_nLineOffset = m_nBufferOffset + m_nBufferPtr;
 	m_sLineText = "";
 
-	for( ; ; )
+	for(bool fBreak = false; !fBreak; )
 	{
 
 		if(m_nBufferPtr <= 0)
@@ -189,13 +199,13 @@ bool CTextFile::ReadPrevLine(bool fSkipCR)
 		for( ; pCharPtr > pCharEnd && *(pCharPtr - 1) != '\n'; pCharPtr--);
 
 		pString.insert(0, pCharPtr, pCharStart - pCharPtr);
+		if(nLineLimit && pString.length() > nLineLimit)
+			pString = pString.remove(nLineLimit, pString.length() - nLineLimit);
 
 		if(*(pCharPtr - 1) == '\n')
-			pCharPtr--;
-		m_nBufferPtr =  pCharPtr - m_pBuffer.data();
+			pCharPtr--, fBreak = true;
 
-		if(pCharPtr != pCharEnd)
-			break;
+		m_nBufferPtr = pCharPtr - m_pBuffer.data();
 
 	}
 

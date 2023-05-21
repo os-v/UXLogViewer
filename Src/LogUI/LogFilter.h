@@ -19,10 +19,12 @@ class CLogFilter
 {
 public:
 
+	enum { ETypeCustom = 0, ETypeRegExp, ETypeSimple, ETypeAuto };
+
 	CLogFilter();
 	~CLogFilter();
 
-	bool Load(QString sFilter, CLogTheme *pTheme);
+	bool Load(QString sFilter, CLogTheme *pTheme, int eType);
 
 	bool Check(QString *pRecord);
 
@@ -180,7 +182,7 @@ protected:
 	QString m_sError;
 	QString m_sFilter;
 	CExprBase *m_pExpression;
-	QRegularExpression m_pRegExp;
+	QRegularExpression *m_pRegExp;
 
 	CLogTheme *m_pTheme;
 

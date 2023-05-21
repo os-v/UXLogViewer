@@ -108,17 +108,18 @@ CMainWindow::CMainWindow(QWidget *parent) :
 			restoreGeometry(pConfig.MainGeometry);
 		restoreState(pConfig.MainState);
 		m_pLogWidget->RestoreState(pConfig.GetMainHeader());
+		m_pLogWidget->SetLastColumnWidth(pConfig.ColumnWidth);
 		for(int iFilter = 0; iFilter < FILTER_COUNT; iFilter++)
 			m_pFilterView[iFilter]->setVisible(pConfig.FilterState[iFilter]);
 	}
 
 	FontSet(this, true);
 
-	m_pLogWidget->UpdateFont();
+	m_pLogWidget->Invalidate();
 	for(int iFilter = 0; iFilter < FILTER_COUNT; iFilter++)
-		((CLogWidget*)m_pFilterView[iFilter]->widget())->UpdateFont();
+		((CLogWidget*)m_pFilterView[iFilter]->widget())->Invalidate();
 
-	setWindowTitle(QString("UXLogViewer v") + PRODUCT_SVERSION);
+	setWindowTitle(QString(PRODUCT_PRODUCTNAME " v") + PRODUCT_SVERSION);
 
 	if(CAppConfig::IsMobile)
 	{
@@ -128,7 +129,10 @@ CMainWindow::CMainWindow(QWidget *parent) :
 	}
 
 	m_pLogWidget->setFocus();
-	
+
+	if(CAppConfig::Instance().FileReopen && !CAppConfig::Instance().LastFilePath.isEmpty())
+		OpenFile(CAppConfig::Instance().LastFilePath);
+
 }
 
 CMainWindow::~CMainWindow()
@@ -225,19 +229,18 @@ QString CMainWindow::PromptFilePath(bool fSave)
 	return CFileDialog::PromptFileName(this, fSave, QString(), sFolder, fStaticFolder);
 }
 
-void CMainWindow::OnFileOpen()
+void CMainWindow::OpenFile(const QString& sFileName)
 {
 
-	QString sFileName = PromptFilePath(false);
-
-	LogMessage("CMainWindow::OnFileOpen() -> %ls", sFileName.utf16());
+	LogMessage("CMainWindow::OpenFile() -> %ls", sFileName.utf16());
 
 	if(sFileName.isEmpty())
 		return;
 
-	QString sPath =
-
-	CAppConfig::Instance().RecentFolder = QFileInfo(sFileName).absolutePath();
+	QFileInfo pFileInfo(sFileName);
+	CAppConfig::Instance().LastFilePath = sFileName;
+	CAppConfig::Instance().RecentFolder = pFileInfo.absolutePath();
+	CAppConfig::Instance().ColumnWidth = m_pLogWidget->GetLastColumnWidth();
 	CAppConfig::Instance().Save();
 
 	m_pLogWidget->ResetData();
@@ -245,6 +248,17 @@ void CMainWindow::OnFileOpen()
 		((CLogWidget*)m_pFilterView[iFilter]->widget())->ResetData();
 
 	m_pLogWidget->LoadFile(sFileName);
+
+	setWindowTitle(PRODUCT_PRODUCTNAME " v" PRODUCT_SVERSION " [" + pFileInfo.fileName() + "]");
+
+}
+
+void CMainWindow::OnFileOpen()
+{
+
+	QString sFileName = PromptFilePath(false);
+
+	OpenFile(sFileName);
 
 }
 
@@ -277,10 +291,10 @@ void CMainWindow::OnFileTheme()
 
 	CAppConfig &pConfig = CAppConfig::Instance();
 
-	m_pLogWidget->ThemeUpdated(pConfig.GetMainHeader());
+	m_pLogWidget->ThemeUpdated(pConfig.GetMainHeader(), pConfig.ColumnWidth);
 
 	for(int iFilter = 0; iFilter < FILTER_COUNT; iFilter++)
-		((CLogWidget*)m_pFilterView[iFilter]->widget())->ThemeUpdated(pConfig.GetFilterHeader(iFilter));
+		((CLogWidget*)m_pFilterView[iFilter]->widget())->ThemeUpdated(pConfig.GetFilterHeader(iFilter), pConfig.ColumnWidth);
 
 }
 
@@ -299,10 +313,10 @@ void CMainWindow::OnFileSync()
 
 	CAppConfig &pConfig = CAppConfig::Instance();
 
-	m_pLogWidget->ThemeUpdated(pConfig.GetMainHeader());
+	m_pLogWidget->ThemeUpdated(pConfig.GetMainHeader(), pConfig.ColumnWidth);
 
 	for(int iFilter = 0; iFilter < FILTER_COUNT; iFilter++)
-		((CLogWidget*)m_pFilterView[iFilter]->widget())->ThemeUpdated(pConfig.GetFilterHeader(iFilter));
+		((CLogWidget*)m_pFilterView[iFilter]->widget())->ThemeUpdated(pConfig.GetFilterHeader(iFilter), pConfig.ColumnWidth);
 
 }
 
@@ -321,9 +335,10 @@ void CMainWindow::OnFileSettings()
 
 	FontInit();
 	FontSet(this, true);
-	m_pLogWidget->UpdateFont();
+	m_pLogWidget->SetLastColumnWidth(CAppConfig::Instance().ColumnWidth);
+	m_pLogWidget->Invalidate();
 	for(int iFilter = 0; iFilter < FILTER_COUNT; iFilter++)
-		((CLogWidget*)m_pFilterView[iFilter]->widget())->UpdateFont();
+		((CLogWidget*)m_pFilterView[iFilter]->widget())->Invalidate();
 
 }
 
@@ -427,6 +442,8 @@ void CMainWindow::OnHelpAbout()
 
 void CMainWindow::OnHeaderSectionResized(int iSection, int nSize)
 {
+
+	CAppConfig::Instance().ColumnWidth = m_pLogWidget->GetLastColumnWidth();
 
 	if(sender() != m_pLogWidget)
 		((CLogWidget*)m_pLogWidget)->ResizeColumn(iSection, nSize);
