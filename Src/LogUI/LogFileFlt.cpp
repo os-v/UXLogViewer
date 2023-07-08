@@ -113,8 +113,9 @@ void CLogFileFlt::ProcessData(bool fSave)
 	m_pProgress->setLabelText(fSave ? "Saving data ..." : "Filtering data ...");
 	m_pProgress->setRange(0, 100);
 	m_pProgress->setValue(0);
+	m_pProgress->setAutoClose(true);
 
-	connect(this, SIGNAL(ProgressUpdate(int)), this, SLOT(OnProgressUpdate(int)), Qt::QueuedConnection);
+	connect(this, SIGNAL(ProgressUpdate(int)), this, SLOT(OnProgressUpdate(int)), Qt::BlockingQueuedConnection);
 
 	m_fTerminate = false;
 	
@@ -130,7 +131,7 @@ void CLogFileFlt::ProcessData(bool fSave)
 
 	wait();
 
-	m_pProgress->close();
+	//m_pProgress->close();
 
 }
 
@@ -470,8 +471,8 @@ void CLogFileFlt::OnProgressUpdate(int nProgress)
 
 	m_pProgress->setValue(nProgress);
 
-	if(nProgress == -1)
-		m_pProgress->close();
+	//if(nProgress == -1)
+		//m_pProgress->close();
 
 }
 
