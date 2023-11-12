@@ -20,16 +20,16 @@
    <item>
     <layout class="QHBoxLayout" name="m_pLayoutFileUI">
      <item>
-      <widget class="QCheckBox" name="m_pCheckFileSaveUI">
+      <widget class="QCheckBox" name="m_pCheckFileOpenUI">
        <property name="text">
-        <string>Custom file save UI</string>
+        <string>Custom file open UI</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="m_pCheckFileOpenUI">
+      <widget class="QCheckBox" name="m_pCheckFileSaveUI">
        <property name="text">
-        <string>Custom file open UI</string>
+        <string>Custom file save UI</string>
        </property>
       </widget>
      </item>

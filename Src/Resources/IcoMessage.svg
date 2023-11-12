@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="Layer_1"
+   data-name="Layer 1"
+   viewBox="0 0 511.99998 512"
+   version="1.1"
+   sodipodi:docname="IcoMessage.svg"
+   width="512"
+   height="512"
+   inkscape:version="1.2.2 (b0a8486, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview2473"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="1.142075"
+     inkscape:cx="373.00527"
+     inkscape:cy="270.56016"
+     inkscape:window-width="1440"
+     inkscape:window-height="900"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="Layer_1" />
+  <defs
+     id="defs2454">
+    <style
+       id="style2452">.cls-1{fill:#fff;}.cls-2{fill:#4a95cc;}.cls-3{fill:#3077ac;}.cls-4{fill:#438ec4;}</style>
+  </defs>
+  <path
+     class="cls-1"
+     d="M 144,462 A 52,52 0 0 1 92,410 V 92 a 52,52 0 0 1 52,-52 h 227 a 52,52 0 0 1 52,52 V 376.61 L 340.17,462 Z"
+     id="path2456" />
+  <path
+     class="cls-2"
+     d="M 333,445 H 144 A 35,35 0 0 1 109,410 V 92 a 35,35 0 0 1 35,-35 h 227 a 35,35 0 0 1 35,35 v 277.72 z"
+     id="path2458" />
+  <polygon
+     class="cls-3"
+     points="240.97,329.56 314,329.56 240.97,405 "
+     id="polygon2460"
+     transform="translate(92,40)" />
+  <polygon
+     class="cls-4"
+     points="240.97,405 167.94,405 240.97,329.56 "
+     id="polygon2462"
+     transform="translate(92,40)" />
+  <rect
+     class="cls-1"
+     x="151.11"
+     y="111.32"
+     width="212.78999"
+     height="28.18"
+     id="rect2464" />
+  <rect
+     class="cls-1"
+     x="151.11"
+     y="169.96001"
+     width="212.78999"
+     height="28.18"
+     id="rect2466" />
+  <rect
+     class="cls-1"
+     x="151.11"
+     y="228.60001"
+     width="212.78999"
+     height="28.18"
+     id="rect2468" />
+  <rect
+     class="cls-1"
+     x="151.11"
+     y="287.23999"
+     width="153.58"
+     height="28.18"
+     id="rect2470" />
+</svg>

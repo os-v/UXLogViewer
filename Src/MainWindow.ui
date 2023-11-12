@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="UXLogViewer.qrc">
-    <normaloff>:/Resources/LogView.png</normaloff>:/Resources/LogView.png</iconset>
+    <normaloff>:/Resources/LogView.svg</normaloff>:/Resources/LogView.svg</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="verticalLayout_2"/>
@@ -127,7 +127,7 @@
   <action name="m_pMenuBarFileOpen">
    <property name="icon">
     <iconset resource="UXLogViewer.qrc">
-     <normaloff>:/Resources/IcoOpen.png</normaloff>:/Resources/IcoOpen.png</iconset>
+     <normaloff>:/Resources/IcoOpen.svg</normaloff>:/Resources/IcoOpen.svg</iconset>
    </property>
    <property name="text">
     <string>&amp;Open</string>
@@ -139,7 +139,7 @@
   <action name="m_pMenuBarFileSave">
    <property name="icon">
     <iconset>
-     <normalon>:/Resources/IcoSave.png</normalon>
+     <normalon>:/Resources/IcoSave.svg</normalon>
     </iconset>
    </property>
    <property name="text">
@@ -152,7 +152,7 @@
   <action name="m_pMenuBarFileSettings">
    <property name="icon">
     <iconset resource="UXLogViewer.qrc">
-     <normaloff>:/Resources/IcoSettings.png</normaloff>:/Resources/IcoSettings.png</iconset>
+     <normaloff>:/Resources/IcoSettings.svg</normaloff>:/Resources/IcoSettings.svg</iconset>
    </property>
    <property name="text">
     <string>Se&amp;ttings</string>
@@ -161,7 +161,7 @@
   <action name="m_pMenuBarFileExit">
    <property name="icon">
     <iconset resource="UXLogViewer.qrc">
-     <normaloff>:/Resources/IcoExit.png</normaloff>:/Resources/IcoExit.png</iconset>
+     <normaloff>:/Resources/IcoExit.svg</normaloff>:/Resources/IcoExit.svg</iconset>
    </property>
    <property name="text">
     <string>&amp;Exit</string>
@@ -170,7 +170,7 @@
   <action name="m_pMenuBarEditCopySelected">
    <property name="icon">
     <iconset resource="UXLogViewer.qrc">
-     <normaloff>:/Resources/IcoCopySelected.png</normaloff>:/Resources/IcoCopySelected.png</iconset>
+     <normaloff>:/Resources/IcoCopySelected.svg</normaloff>:/Resources/IcoCopySelected.svg</iconset>
    </property>
    <property name="text">
     <string>&amp;Copy Selected</string>
@@ -185,7 +185,7 @@
    </property>
    <property name="icon">
     <iconset resource="UXLogViewer.qrc">
-     <normaloff>:/Resources/IcoFilterA.png</normaloff>:/Resources/IcoFilterA.png</iconset>
+     <normaloff>:/Resources/IcoFilterA.svg</normaloff>:/Resources/IcoFilterA.svg</iconset>
    </property>
    <property name="text">
     <string>&amp;Filter A View</string>
@@ -197,7 +197,7 @@
    </property>
    <property name="icon">
     <iconset resource="UXLogViewer.qrc">
-     <normaloff>:/Resources/IcoResults.png</normaloff>:/Resources/IcoResults.png</iconset>
+     <normaloff>:/Resources/IcoResults.svg</normaloff>:/Resources/IcoResults.svg</iconset>
    </property>
    <property name="text">
     <string>&amp;Result View</string>
@@ -209,7 +209,7 @@
    </property>
    <property name="icon">
     <iconset resource="UXLogViewer.qrc">
-     <normaloff>:/Resources/IcoFilterSubA.png</normaloff>:/Resources/IcoFilterSubA.png</iconset>
+     <normaloff>:/Resources/IcoFilterSubA.svg</normaloff>:/Resources/IcoFilterSubA.svg</iconset>
    </property>
    <property name="text">
     <string>&amp;Sub Filter A View</string>
@@ -221,7 +221,7 @@
    </property>
    <property name="icon">
     <iconset resource="UXLogViewer.qrc">
-     <normaloff>:/Resources/IcoFilterB.png</normaloff>:/Resources/IcoFilterB.png</iconset>
+     <normaloff>:/Resources/IcoFilterB.svg</normaloff>:/Resources/IcoFilterB.svg</iconset>
    </property>
    <property name="text">
     <string>Filter &amp;B View</string>
@@ -233,7 +233,7 @@
    </property>
    <property name="icon">
     <iconset resource="UXLogViewer.qrc">
-     <normaloff>:/Resources/IcoFilterSubB.png</normaloff>:/Resources/IcoFilterSubB.png</iconset>
+     <normaloff>:/Resources/IcoFilterSubB.svg</normaloff>:/Resources/IcoFilterSubB.svg</iconset>
    </property>
    <property name="text">
     <string>S&amp;ub Filter B View</string>
@@ -242,7 +242,7 @@
   <action name="m_pMenuBarEditAddToResults">
    <property name="icon">
     <iconset resource="UXLogViewer.qrc">
-     <normaloff>:/Resources/IcoAddToResults.png</normaloff>:/Resources/IcoAddToResults.png</iconset>
+     <normaloff>:/Resources/IcoAddToResults.svg</normaloff>:/Resources/IcoAddToResults.svg</iconset>
    </property>
    <property name="text">
     <string>&amp;Add To Results</string>
@@ -251,7 +251,7 @@
   <action name="m_pMenuBarHelpAbout">
    <property name="icon">
     <iconset>
-     <normalon>:/Resources/IcoAbout.png</normalon>
+     <normalon>:/Resources/IcoAbout.svg</normalon>
     </iconset>
    </property>
    <property name="text">
@@ -264,7 +264,7 @@
   <action name="m_pMenuBarFileChangeTheme">
    <property name="icon">
     <iconset resource="UXLogViewer.qrc">
-     <normaloff>:/Resources/IcoThemeEdit.png</normaloff>:/Resources/IcoThemeEdit.png</iconset>
+     <normaloff>:/Resources/IcoThemeEdit.svg</normaloff>:/Resources/IcoThemeEdit.svg</iconset>
    </property>
    <property name="text">
     <string>&amp;Change Theme</string>
@@ -273,7 +273,7 @@
   <action name="m_pMenuBarEditCopyResults">
    <property name="icon">
     <iconset resource="UXLogViewer.qrc">
-     <normaloff>:/Resources/IcoCopyResults.png</normaloff>:/Resources/IcoCopyResults.png</iconset>
+     <normaloff>:/Resources/IcoCopyResults.svg</normaloff>:/Resources/IcoCopyResults.svg</iconset>
    </property>
    <property name="text">
     <string>Copy Results</string>
@@ -282,7 +282,7 @@
   <action name="m_pMenuBarFileSyncTheme">
    <property name="icon">
     <iconset resource="UXLogViewer.qrc">
-     <normaloff>:/Resources/IcoThemeSync.png</normaloff>:/Resources/IcoThemeSync.png</iconset>
+     <normaloff>:/Resources/IcoThemeSync.svg</normaloff>:/Resources/IcoThemeSync.svg</iconset>
    </property>
    <property name="text">
     <string>S&amp;ync Themes</string>
@@ -291,7 +291,7 @@
   <action name="m_pMenuBarEditClear">
    <property name="icon">
     <iconset resource="UXLogViewer.qrc">
-     <normaloff>:/Resources/IcoClear.png</normaloff>:/Resources/IcoClear.png</iconset>
+     <normaloff>:/Resources/IcoClear.svg</normaloff>:/Resources/IcoClear.svg</iconset>
    </property>
    <property name="text">
     <string>C&amp;lear</string>
@@ -300,7 +300,7 @@
   <action name="m_pMenuBarEditMessage">
    <property name="icon">
     <iconset resource="UXLogViewer.qrc">
-     <normaloff>:/Resources/IcoMessage.png</normaloff>:/Resources/IcoMessage.png</iconset>
+     <normaloff>:/Resources/IcoMessage.svg</normaloff>:/Resources/IcoMessage.svg</iconset>
    </property>
    <property name="text">
     <string>&amp;Show Message</string>

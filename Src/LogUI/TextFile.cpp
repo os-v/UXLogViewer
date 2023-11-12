@@ -75,7 +75,8 @@ bool CTextFile::Create(QString sPath, int nFrame)
 	m_pFile->setFileName(sPath);
 	if(!m_pFile->open(QIODevice::ReadOnly))
 	{
-		LogMessage("CTextFile::Create() -> failed");
+		QString sError = m_pFile->errorString();
+		LogMessage("CTextFile::Create() -> failed: %s", sError.toLatin1().data());
 		SafeDelete(m_pFile);
 		return false;
 	}

@@ -9,8 +9,8 @@
 
 #pragma once
 
-#define PRODUCT_VERSION				1,3,1,0
-#define PRODUCT_SVERSION			"1.3.1"
+#define PRODUCT_VERSION				1,5,1,0
+#define PRODUCT_SVERSION			"1.5.1"
 
 #define PRODUCT_PRODUCTNAME			"UXLogViewer"
 #define PRODUCT_COMPANYNAME			"https://github.com/os-v"

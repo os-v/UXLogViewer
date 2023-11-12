@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
 
 	QApplication pApp(argc, argv);
 
-	QApplication::setWindowIcon(QIcon(":/Resources/LogView.png"));
+	QApplication::setWindowIcon(QIcon(":/Resources/LogView.svg"));
 
 	CAppConfig::Instance().Load();
 
@@ -37,6 +37,11 @@ int main(int argc, char *argv[])
 
 	CLogTheme::Instance().UpdateThemes(CAppConfig::Instance().ThemeDefs);
 	CLogTheme::Instance().Select(CAppConfig::Instance().ThemeSelected);
+
+	pApp.setAutoSipEnabled(false);
+
+	QInputMethod* input = QGuiApplication::inputMethod();
+	input->setVisible(false);
 
 	CMainWindow *pWindow = new CMainWindow();
 	pWindow->show();

@@ -38,7 +38,7 @@ CAboutDialog::CAboutDialog(QWidget *parent) :
 
 	if(LogIsEnabled())
 	{
-		QImage pImage(":/Resources/LogView.png");
+		QImage pImage(":/Resources/LogView.svg");
 		pImage = pImage.convertToFormat(QImage::Format_Mono);
 		ui->m_pImage->setPixmap(QPixmap::fromImage(pImage));
 	}
@@ -62,11 +62,11 @@ void CAboutDialog::mousePressEvent(QMouseEvent *event)
 void CAboutDialog::mouseReleaseEvent(QMouseEvent *event)
 {
 
-	if(m_pElapsedTimer.elapsed() >=LOG_TRIGGERTIME)
+	if(m_pElapsedTimer.elapsed() >= LOG_TRIGGERTIME)
 	{
 		bool fLogEnabled = !LogIsEnabled();
 		LogEnable(fLogEnabled);
-		QImage pImage(":/Resources/LogView.png");
+		QImage pImage(":/Resources/LogView.svg");
 		if(fLogEnabled)
 			pImage = pImage.convertToFormat(QImage::Format_Mono);
 		ui->m_pImage->setPixmap(QPixmap::fromImage(pImage));

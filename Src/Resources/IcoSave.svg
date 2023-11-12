@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="Layer_1"
+   data-name="Layer 1"
+   viewBox="0 0 512 512.00001"
+   version="1.1"
+   sodipodi:docname="IcoSave.svg"
+   width="512"
+   height="512"
+   inkscape:version="1.2.2 (b0a8486, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview2915"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="1.155151"
+     inkscape:cx="246.72098"
+     inkscape:cy="273.5573"
+     inkscape:window-width="1440"
+     inkscape:window-height="900"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="Layer_1" />
+  <defs
+     id="defs2882">
+    <style
+       id="style2880">.cls-1{fill:#fff;}.cls-2{fill:#abacac;}.cls-3{fill:#f05051;}.cls-4{fill:#c8c8c8;}.cls-5{fill:#959595;}.cls-6{fill:#8d8d8d;}.cls-7{fill:#f0f0f0;}</style>
+  </defs>
+  <path
+     class="cls-1"
+     d="M 22,471.73 V 36.23 A 18.23,18.23 0 0 1 40.23,18 h 304.45 a 26.73,26.73 0 0 1 17.43,6.47 L 484.37,129.69 A 26.77,26.77 0 0 1 493.66,150 V 471.73 A 18.23,18.23 0 0 1 475.43,490 H 40.23 A 18.23,18.23 0 0 1 22,471.73 Z"
+     id="path2884" />
+  <polygon
+     class="cls-2"
+     points="453.23,426.94 453.23,128.14 325.76,18.43 18.43,18.43 18.43,426.94 "
+     id="polygon2886"
+     transform="translate(22,18)" />
+  <rect
+     class="cls-3"
+     x="40.43"
+     y="444.94"
+     width="434.81"
+     height="26.6"
+     id="rect2888" />
+  <rect
+     class="cls-1"
+     x="94.879997"
+     y="253.09"
+     width="323.42999"
+     height="191.84"
+     id="rect2890" />
+  <polygon
+     class="cls-4"
+     points="325.76,128.14 325.76,18.43 453.23,128.14 "
+     id="polygon2892"
+     transform="translate(22,18)" />
+  <polygon
+     class="cls-5"
+     points="453.23,128.14 325.76,128.14 453.23,220.62 "
+     id="polygon2894"
+     transform="translate(22,18)" />
+  <rect
+     class="cls-6"
+     x="94.879997"
+     y="57.639999"
+     width="211.78"
+     height="107.75"
+     id="rect2896" />
+  <rect
+     class="cls-1"
+     x="174.72"
+     y="65.759995"
+     width="124"
+     height="91.800003"
+     id="rect2898" />
+  <rect
+     class="cls-6"
+     x="250.71002"
+     y="85.360001"
+     width="27.68"
+     height="40.080002"
+     id="rect2900" />
+  <rect
+     class="cls-7"
+     x="122.17"
+     y="405.60001"
+     width="264.69"
+     height="4.0500002"
+     id="rect2902" />
+  <rect
+     class="cls-7"
+     x="122.17"
+     y="365.5"
+     width="264.69"
+     height="4.0500002"
+     id="rect2904" />
+  <rect
+     class="cls-7"
+     x="122.17"
+     y="325.39999"
+     width="264.69"
+     height="4.0500002"
+     id="rect2906" />
+  <rect
+     class="cls-7"
+     x="122.17"
+     y="285.29999"
+     width="264.69"
+     height="4.0500002"
+     id="rect2908" />
+  <rect
+     class="cls-1"
+     x="58.449997"
+     y="409.57999"
+     width="20.120001"
+     height="20.120001"
+     id="rect2910" />
+  <rect
+     class="cls-1"
+     x="434.60999"
+     y="409.57999"
+     width="20.120001"
+     height="20.120001"
+     id="rect2912" />
+</svg>

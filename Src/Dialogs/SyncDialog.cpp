@@ -37,10 +37,6 @@ CSyncDialog::CSyncDialog(QWidget *parent) :
 	m_fResponse = false;
 	m_fUpdated = false;
 
-	FontSet(this, true);
-
-	setFixedSize(size());
-
 	ui->m_pEditUsername->setText(CAppConfig::Instance().ServiceUser);
 
 	ui->m_pRadioTypeReplace->setChecked(true);
@@ -53,6 +49,8 @@ CSyncDialog::CSyncDialog(QWidget *parent) :
 
 	ui->m_pButtonsDialog->button(QDialogButtonBox::Ok)->setText("Sync");
 	ui->m_pButtonsDialog->button(QDialogButtonBox::Cancel)->setText("Close");
+
+	FontSet(this, true);
 
 }
 

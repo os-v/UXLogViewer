@@ -1,5 +1,5 @@
 
-QT += core gui widgets network
+QT += core gui widgets network svg
 
 TARGET = UXLogViewer
 TEMPLATE = app
@@ -83,11 +83,14 @@ macx:!ios {
 }
 
 ios: {
-    ios_icon.files = $$files($$PWD/Platforms/iOS/AppIcon.iconset/*.png)
+    ios_icon.files = $$files($$PWD/Platforms/iOS/AppIcon.iconset/*.svg)
     QMAKE_BUNDLE_DATA += ios_icon
-    app_launch_images.files = $$PWD/Platforms/iOS/LauncherScreen.xib $$files($$PWD/Platforms/iOS/LaunchImage*.png) $$files($$PLATFORMS_DIR/iOS/SplashImage*.png)
+    app_launch_images.files = $$PWD/Platforms/iOS/LauncherScreen.xib $$files($$PWD/Platforms/iOS/LaunchImage*.svg) $$files($$PLATFORMS_DIR/iOS/SplashImage*.svg)
     QMAKE_BUNDLE_DATA += app_launch_images
     QMAKE_INFO_PLIST = $$PWD/Platforms/iOS/Info.plist
+    QMAKE_TARGET_BUNDLE_PREFIX = com.osv
+    #QMAKE_DEVELOPMENT_TEAM =
+    #QMAKE_PROVISIONING_PROFILE =
 }
 
 win32 {

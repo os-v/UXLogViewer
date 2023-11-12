@@ -48,13 +48,11 @@ CSettingsDialog::CSettingsDialog(QWidget *parent) :
 	ui->m_pEditLineLimit->setMaximum(INT_MAX);
 	ui->m_pEditLineLimit->setValue(pConfig.MaxLineLength);
 
-	FontSet(this, true);
-
-	setFixedSize(size());
-
 	ui->m_pWidgetSpacingDesktop->setVisible(false);
 	if(!CAppConfig::Instance().IsMobile)
 		ui->m_pWidgetSpacingMobile->setVisible(false);
+
+	FontSet(this, true);
 
 }
 

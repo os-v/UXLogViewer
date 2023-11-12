@@ -23,6 +23,7 @@
 #include "Dialogs/AboutDialog.h"
 #include "ProductInfo.h"
 #include <QStandardPaths>
+#include <QScreen>
 
 CMainWindow::CMainWindow(QWidget *parent) :
 	QMainWindow(parent),
@@ -126,6 +127,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
 		menuBar()->hide();
 		statusBar()->hide();
 		ui->m_pToolBar->setMovable(false);
+		//resize(QGuiApplication::primaryScreen()->size());
 	}
 
 	m_pLogWidget->setFocus();

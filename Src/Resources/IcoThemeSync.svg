@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="Layer_1"
+   data-name="Layer 1"
+   viewBox="0 0 512.00001 511.99999"
+   version="1.1"
+   sodipodi:docname="IcoThemeSync.svg"
+   width="512"
+   height="512"
+   inkscape:version="1.2.2 (b0a8486, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview825"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="0.91685219"
+     inkscape:cx="456.99842"
+     inkscape:cy="246.49557"
+     inkscape:window-width="1440"
+     inkscape:window-height="900"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="Layer_1" />
+  <defs
+     id="defs792">
+    <style
+       id="style790">.cls-1{fill:#fff;}.cls-2{fill:#00b2b1;}.cls-3{fill:#e8eaec;}.cls-4{fill:#2ab24b;}</style>
+  </defs>
+  <path
+     class="cls-1"
+     d="M 78.59,418.57 H 51.43 A 23.43,23.43 0 0 1 28,395.14 V 108.37 A 23.43,23.43 0 0 1 51.43,84.94 h 85.42 a 210.12,210.12 0 0 1 233.09,-7.08 l 24.41,-24.12 a 20,20 0 0 1 33.58,9.92 l 4.68,21.28 h 33.49 a 23.42,23.42 0 0 1 23.42,23.43 V 395.14 A 23.42,23.42 0 0 1 466.1,418.57 H 391 A 209.66,209.66 0 0 1 258.75,465.51 207.43,207.43 0 0 1 142.81,430.59 L 118,455.11 a 20,20 0 0 1 -33.58,-9.92 z"
+     id="path794" />
+  <rect
+     class="cls-2"
+     x="46.43"
+     y="103.37"
+     width="424.67001"
+     height="296.76999"
+     id="rect796" />
+  <rect
+     class="cls-3"
+     x="79.540001"
+     y="133.67"
+     width="358.44"
+     height="236.99001"
+     id="rect798" />
+  <rect
+     class="cls-1"
+     x="121.8"
+     y="168.22"
+     width="109.09"
+     height="17.08"
+     id="rect800" />
+  <rect
+     class="cls-1"
+     x="121.8"
+     y="203.78"
+     width="109.09"
+     height="17.08"
+     id="rect802" />
+  <rect
+     class="cls-1"
+     x="121.8"
+     y="239.33"
+     width="109.09"
+     height="17.08"
+     id="rect804" />
+  <rect
+     class="cls-1"
+     x="121.8"
+     y="274.89001"
+     width="109.09"
+     height="17.08"
+     id="rect806" />
+  <rect
+     class="cls-1"
+     x="121.8"
+     y="310.44"
+     width="109.09"
+     height="17.08"
+     id="rect808" />
+  <rect
+     class="cls-1"
+     x="287.60999"
+     y="168.22"
+     width="109.09"
+     height="17.08"
+     id="rect810" />
+  <rect
+     class="cls-1"
+     x="287.60999"
+     y="203.78"
+     width="109.09"
+     height="17.08"
+     id="rect812" />
+  <rect
+     class="cls-1"
+     x="287.60999"
+     y="239.33"
+     width="109.09"
+     height="17.08"
+     id="rect814" />
+  <rect
+     class="cls-1"
+     x="287.60999"
+     y="274.89001"
+     width="109.09"
+     height="17.08"
+     id="rect816" />
+  <rect
+     class="cls-1"
+     x="287.60999"
+     y="310.44"
+     width="109.09"
+     height="17.08"
+     id="rect818" />
+  <path
+     class="cls-4"
+     d="m 440.39,224.35 -34.22,-155.6 -37.3,36.87 A 185.49,185.49 0 0 0 257.62,68.75 C 160.05,68.75 80,143.75 72,239.23 l 62,13.89 A 123.65,123.65 0 0 1 323.53,150.44 l -41.2,40.71 z"
+     id="path820" />
+  <path
+     class="cls-4"
+     d="m 72,284.49 34.2,155.6 37.3,-36.87 a 185.42,185.42 0 0 0 111.25,36.87 c 97.57,0 177.6,-75 185.64,-170.48 l -62,-13.88 A 123.67,123.67 0 0 1 188.84,358.41 L 230,317.69 Z"
+     id="path822" />
+</svg>
